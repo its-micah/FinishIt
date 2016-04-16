@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splashscreen1" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-Rj-C9b">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="qGO-Rj-C9b" secondAttribute="trailing" id="ZXG-n9-wZ5"/>
+                            <constraint firstItem="qGO-Rj-C9b" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fPg-WZ-VwS"/>
+                            <constraint firstItem="qGO-Rj-C9b" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="q4m-q7-LDy"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="qGO-Rj-C9b" secondAttribute="bottom" id="yRr-uy-czU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZXG-n9-wZ5"/>
+                                <exclude reference="fPg-WZ-VwS"/>
+                                <exclude reference="q4m-q7-LDy"/>
+                                <exclude reference="yRr-uy-czU"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="ZXG-n9-wZ5"/>
+                                <include reference="fPg-WZ-VwS"/>
+                                <include reference="q4m-q7-LDy"/>
+                                <include reference="yRr-uy-czU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.5" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splashscreen1" width="750" height="1334"/>
+    </resources>
+</document>
