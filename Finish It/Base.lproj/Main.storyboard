@@ -54,6 +54,49 @@
             </objects>
             <point key="canvasLocation" x="528" y="-250"/>
         </scene>
+        <!--Create Quote View Controller-->
+        <scene sceneID="uMu-ex-q3p">
+            <objects>
+                <viewController storyboardIdentifier="CreateQuoteVC" id="lau-3V-bmd" customClass="CreateQuoteViewController" customModule="Finish_It" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UgY-UO-pFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="9oL-Jy-W1j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Iee-kw-WYR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7M-px-Ab4">
+                                <rect key="frame" x="16" y="142" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mpn-ac-gnE">
+                                <rect key="frame" x="16" y="169" width="288" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s7M-px-Ab4" firstAttribute="trailing" secondItem="Iee-kw-WYR" secondAttribute="trailingMargin" id="1fa-Hc-fzh"/>
+                            <constraint firstItem="Mpn-ac-gnE" firstAttribute="top" secondItem="s7M-px-Ab4" secondAttribute="bottom" constant="6" id="58q-1Z-92K"/>
+                            <constraint firstItem="Mpn-ac-gnE" firstAttribute="trailing" secondItem="Iee-kw-WYR" secondAttribute="trailingMargin" id="YIT-Lb-ASM"/>
+                            <constraint firstItem="s7M-px-Ab4" firstAttribute="top" secondItem="UgY-UO-pFk" secondAttribute="bottom" constant="78" id="akk-aL-4P0"/>
+                            <constraint firstItem="s7M-px-Ab4" firstAttribute="leading" secondItem="Iee-kw-WYR" secondAttribute="leadingMargin" id="jdK-Da-DM2"/>
+                            <constraint firstItem="Mpn-ac-gnE" firstAttribute="leading" secondItem="Iee-kw-WYR" secondAttribute="leadingMargin" id="xcp-6j-tdZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NII-ee-uOd"/>
+                    <connections>
+                        <outlet property="quoteLabel" destination="s7M-px-Ab4" id="XdV-EP-tP2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dsu-PX-yrj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="923" y="-250"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="oH4-rA-8Fh">
             <objects>

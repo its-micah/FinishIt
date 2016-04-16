@@ -47,4 +47,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return quotes.count
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let selectedQuote = quotes[indexPath.row] as Quote
+        let createQuoteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CreateQuoteVC") as! CreateQuoteViewController
+        createQuoteVC.quote = selectedQuote.quoteText
+        self.navigationController?.pushViewController(createQuoteVC, animated: true)
+    }
+
 }
