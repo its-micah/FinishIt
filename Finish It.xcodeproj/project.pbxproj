@@ -18,6 +18,7 @@
 		C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */; };
 		C75A05FD1CC07E5B00FFC983 /* Finish_ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05FC1CC07E5B00FFC983 /* Finish_ItTests.swift */; };
 		C75A06081CC07E5B00FFC983 /* Finish_ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */; };
+		C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */; };
 		C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		C75A06031CC07E5B00FFC983 /* Finish ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Finish ItUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finish_ItUITests.swift; sourceTree = "<group>"; };
 		C75A06091CC07E5B00FFC983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
 		C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Finish_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */,
 				C75A05E91CC07E5B00FFC983 /* ViewController.swift */,
 				C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */,
+				C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */,
 				C71BA91D1CC1DABC00C89E3D /* Constants.swift */,
 				C71BA91F1CC1DAFA00C89E3D /* DataService.swift */,
 				C71BA9211CC1DC3800C89E3D /* Quote.swift */,
@@ -345,6 +348,7 @@
 			files = (
 				C75A05EA1CC07E5B00FFC983 /* ViewController.swift in Sources */,
 				C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */,
+				C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */,
 				C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */,
 				C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */,
 				C71BA9221CC1DC3800C89E3D /* Quote.swift in Sources */,
