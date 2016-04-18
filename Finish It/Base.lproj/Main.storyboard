@@ -126,6 +126,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7qH-dg-skP"/>
                     <connections>
+                        <outlet property="quoteLabelTopConstraint" destination="wuA-xp-upT" id="43S-D7-nIc"/>
                         <outlet property="quoteOfDayLabel" destination="aHq-oM-XWo" id="beQ-hp-xej"/>
                     </connections>
                 </viewController>
