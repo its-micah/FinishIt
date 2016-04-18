@@ -8,19 +8,26 @@
 
 import UIKit
 import Firebase
+import TKSubmitTransition
+import pop
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var quoteOfDayLabel: UILabel!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var lineView: UIView!
     let ref = Firebase(url: "https://finishit.firebaseIO.com")
     var quote = Quote(quoteText:"")
+    @IBOutlet var finishedButton: UIButton!
 
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        quoteLabelTopConstraint.constant = -10
+        quoteLabelTopConstraint.constant = -30
+        lineView.alpha = 0
+        textField.alpha = 0
 
     }
 
@@ -35,12 +42,25 @@ class ViewController: UIViewController {
                 self.quoteOfDayLabel.text = quote.quoteText
             })
 
-            UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
-                self.quoteLabelTopConstraint.constant = 100
-                self.view.layoutIfNeeded()
-                }, completion: nil)
+                let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+                spring.toValue = 100
+                spring.springBounciness = 20
+                spring.springSpeed = 2
+                spring.beginTime = (CACurrentMediaTime() + 1)
+                self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
+            
+            UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
+                self.lineView.alpha = 1
+                self.textField.alpha = 1
+            }, completion: nil)
+            
         })
 
+    }
+    
+    
+    @IBAction func onFinishedButtonTapped(sender: AnyObject) {
+        print("button tapped")
     }
 
     override func didReceiveMemoryWarning() {
