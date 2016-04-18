@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'Finish It' do
 pod 'Firebase', '>= 2.5.1'
+pod 'pop', '~> 1.0'
 end
 
 target 'Finish ItTests' do
