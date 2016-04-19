@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lineView: UIView!
     let ref = Firebase(url: "https://finishit.firebaseIO.com")
     var quote = Quote(quoteText:"")
-    @IBOutlet var finishedButton: UIButton!
+    @IBOutlet var finishedButton: FinishedButton!
 
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
 
@@ -28,6 +28,7 @@ class ViewController: UIViewController {
         quoteLabelTopConstraint.constant = -30
         lineView.alpha = 0
         textField.alpha = 0
+        finishedButton.alpha = 0
 
     }
 
@@ -52,6 +53,7 @@ class ViewController: UIViewController {
             UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
                 self.lineView.alpha = 1
                 self.textField.alpha = 1
+                self.finishedButton.alpha = 1
             }, completion: nil)
             
         })
@@ -59,9 +61,12 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func onFinishedButtonTapped(sender: AnyObject) {
-        print("button tapped")
+    @IBAction func onFinishedButtonTapped(sender: FinishedButton) {
+        sender.animateTouchUpInside { 
+            print("touched")
+        }
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
