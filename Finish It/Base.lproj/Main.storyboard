@@ -159,8 +159,9 @@
                                     <constraint firstAttribute="width" constant="58" id="Huw-6Z-gtQ"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOg-xm-b53">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOg-xm-b53" customClass="BlurView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <gestureRecognizers/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-S3-TP2" customClass="FinishedQuoteView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="48" y="156" width="224" height="256"/>
@@ -242,7 +243,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7qH-dg-skP"/>
                     <connections>
-                        <outlet property="dimView" destination="eOg-xm-b53" id="jA4-C4-vKh"/>
+                        <outlet property="blurView" destination="eOg-xm-b53" id="rmi-ra-FRx"/>
                         <outlet property="finishedButton" destination="neY-qT-q1F" id="cfj-0k-izP"/>
                         <outlet property="finishedQuoteView" destination="W5S-S3-TP2" id="hyH-Zv-MIg"/>
                         <outlet property="lineView" destination="a7v-x7-dgl" id="kjU-cB-axh"/>

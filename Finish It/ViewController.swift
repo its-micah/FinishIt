@@ -11,7 +11,7 @@ import Firebase
 import TKSubmitTransition
 import pop
 
-class ViewController: UIViewController, FinishedQuoteViewProtocol {
+class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol {
 
     @IBOutlet weak var quoteOfDayLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -20,7 +20,7 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol {
     var quote = Quote(quoteText:"")
     @IBOutlet var finishedButton: FinishedButton!
     @IBOutlet weak var finishedQuoteView: FinishedQuoteView!
-    @IBOutlet weak var dimView: UIView!
+    @IBOutlet weak var blurView: BlurView!
 
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
 
@@ -32,8 +32,8 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol {
         textField.alpha = 0
         finishedButton.alpha = 0
         finishedQuoteView.alpha = 0
-        dimView.alpha = 0
         finishedQuoteView.delegate = self
+        blurView.delegate = self
 
     }
 
@@ -78,16 +78,8 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol {
             spring.springBounciness = 10
             spring.springSpeed = 8
             self.finishedQuoteView.layer.pop_addAnimation(spring, forKey: "moveDown")
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //always fill the view
-            blurEffectView.frame = self.dimView.bounds
-            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            
-            self.dimView.addSubview(blurEffectView)
             UIView.animateWithDuration(0.5, animations: {
-                self.dimView.hidden = false
-                self.dimView.alpha = 0.5
+                self.blurView.animate()
             })
             
         }
@@ -104,6 +96,20 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol {
             size: CGSize(width: self.view.frame.width / 1.2, height: self.view.frame.height / 1.2))
         
         self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
+    func dismiss() {
+        let spring = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+        spring.toValue = NSValue(CGSize: CGSizeMake( 0.5, 0.5))
+        spring.springBounciness = 10
+        spring.springSpeed = 8
+        finishedQuoteView.layer.pop_addAnimation(spring, forKey: "scaleDown")
+        UIView.animateWithDuration(0.5) { 
+            self.blurView.alpha = 0
+        }
+        UIView.animateWithDuration(0.4) { 
+            self.finishedQuoteView.alpha = 0
+        }
     }
 
 
