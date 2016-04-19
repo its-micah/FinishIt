@@ -11,7 +11,7 @@ import Firebase
 import TKSubmitTransition
 import pop
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, FinishedQuoteViewProtocol {
 
     @IBOutlet weak var quoteOfDayLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     let ref = Firebase(url: "https://finishit.firebaseIO.com")
     var quote = Quote(quoteText:"")
     @IBOutlet var finishedButton: FinishedButton!
+    @IBOutlet weak var finishedQuoteView: FinishedQuoteView!
+    @IBOutlet weak var dimView: UIView!
 
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
 
@@ -29,6 +31,9 @@ class ViewController: UIViewController {
         lineView.alpha = 0
         textField.alpha = 0
         finishedButton.alpha = 0
+        finishedQuoteView.alpha = 0
+        dimView.alpha = 0
+        finishedQuoteView.delegate = self
 
     }
 
@@ -64,7 +69,41 @@ class ViewController: UIViewController {
     @IBAction func onFinishedButtonTapped(sender: FinishedButton) {
         sender.animateTouchUpInside { 
             print("touched")
+            self.resignFirstResponder()
+            self.finishedQuoteView.hidden = false
+            self.finishedQuoteView.alpha = 1
+            self.finishedQuoteView.quoteLabel.text = "\(self.quoteOfDayLabel.text!) \(self.textField.text!)"
+            let spring = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+            spring.toValue = NSValue(CGSize: CGSizeMake( 1.1, 1.1))
+            spring.springBounciness = 10
+            spring.springSpeed = 8
+            self.finishedQuoteView.layer.pop_addAnimation(spring, forKey: "moveDown")
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.dimView.bounds
+            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            
+            self.dimView.addSubview(blurEffectView)
+            UIView.animateWithDuration(0.5, animations: {
+                self.dimView.hidden = false
+                self.dimView.alpha = 0.5
+            })
+            
         }
+    }
+    
+    func showSharingWithImageAndText(image: UIImage, text: String) {
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [text, image],
+            applicationActivities: nil)
+        let presentationController = activityViewController.popoverPresentationController
+        presentationController?.sourceView = self.view
+        presentationController?.sourceRect = CGRect(
+            origin: CGPointZero,
+            size: CGSize(width: self.view.frame.width / 1.2, height: self.view.frame.height / 1.2))
+        
+        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 
