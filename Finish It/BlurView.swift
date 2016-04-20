@@ -43,9 +43,6 @@ class BlurView: UIView, UIGestureRecognizerDelegate {
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.addSubview(blurEffectView)
         
-        let tap = UITapGestureRecognizer(target: self, action: Selector(handleTap()))
-        tap.delegate = self
-        self.addGestureRecognizer(tap)
 
     }
     
@@ -53,9 +50,11 @@ class BlurView: UIView, UIGestureRecognizerDelegate {
         self.alpha = 1
     }
     
-    func handleTap(sender: UITapGestureRecognizer? = nil) {
-        // handling code
+    @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
         self.delegate?.dismiss()
+
     }
+    
+    
 
 }

@@ -162,6 +162,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOg-xm-b53" customClass="BlurView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="xt5-qw-n2w" appends="YES" id="lMj-oO-p3F"/>
+                                </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-S3-TP2" customClass="FinishedQuoteView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="48" y="156" width="224" height="256"/>
@@ -253,6 +256,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsg-BO-cj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xt5-qw-n2w">
+                    <connections>
+                        <action selector="handleTap:" destination="eOg-xm-b53" id="WcV-D2-JiL"/>
+                        <outlet property="delegate" destination="eOg-xm-b53" id="P8w-Ua-e5R"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="528" y="-879"/>
         </scene>
