@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2794461E1CC67A2C009358FA /* FinishedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794461D1CC67A2C009358FA /* FinishedButton.swift */; };
+		279446211CC67A90009358FA /* AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794461F1CC67A90009358FA /* AnimationDelegate.swift */; };
+		279446221CC67A90009358FA /* CircularRevealAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446201CC67A90009358FA /* CircularRevealAnimator.swift */; };
+		279446241CC67F53009358FA /* UIView+IBInspectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446231CC67F53009358FA /* UIView+IBInspectable.swift */; };
+		279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446251CC69B61009358FA /* FinishedQuoteView.swift */; };
+		279446281CC6D2A9009358FA /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446271CC6D2A9009358FA /* BlurView.swift */; };
 		B57482043E6DA3EA00E039D0 /* Pods_Finish_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */; };
 		C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA91D1CC1DABC00C89E3D /* Constants.swift */; };
 		C71BA9201CC1DAFA00C89E3D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA91F1CC1DAFA00C89E3D /* DataService.swift */; };
@@ -40,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2794461D1CC67A2C009358FA /* FinishedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedButton.swift; sourceTree = "<group>"; };
+		2794461F1CC67A90009358FA /* AnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
+		279446201CC67A90009358FA /* CircularRevealAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularRevealAnimator.swift; sourceTree = "<group>"; };
+		279446231CC67F53009358FA /* UIView+IBInspectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspectable.swift"; sourceTree = "<group>"; };
+		279446251CC69B61009358FA /* FinishedQuoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedQuoteView.swift; sourceTree = "<group>"; };
+		279446271CC6D2A9009358FA /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		8B75667C5ED57EC489518880 /* Pods-Finish It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finish It.release.xcconfig"; path = "Pods/Target Support Files/Pods-Finish It/Pods-Finish It.release.xcconfig"; sourceTree = "<group>"; };
 		BAAC54189B709908E9D9617E /* Pods-Finish It.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finish It.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Finish It/Pods-Finish It.debug.xcconfig"; sourceTree = "<group>"; };
 		C71BA91D1CC1DABC00C89E3D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -125,10 +137,16 @@
 				C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */,
 				C75A05E91CC07E5B00FFC983 /* ViewController.swift */,
 				C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */,
+				2794461F1CC67A90009358FA /* AnimationDelegate.swift */,
+				279446201CC67A90009358FA /* CircularRevealAnimator.swift */,
+				2794461D1CC67A2C009358FA /* FinishedButton.swift */,
+				279446271CC6D2A9009358FA /* BlurView.swift */,
+				279446231CC67F53009358FA /* UIView+IBInspectable.swift */,
 				C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */,
 				C71BA91D1CC1DABC00C89E3D /* Constants.swift */,
 				C71BA91F1CC1DAFA00C89E3D /* DataService.swift */,
 				C71BA9211CC1DC3800C89E3D /* Quote.swift */,
+				279446251CC69B61009358FA /* FinishedQuoteView.swift */,
 				C75A05EB1CC07E5B00FFC983 /* Main.storyboard */,
 				C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */,
 				C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */,
@@ -347,10 +365,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C75A05EA1CC07E5B00FFC983 /* ViewController.swift in Sources */,
+				279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */,
 				C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */,
 				C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */,
 				C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */,
 				C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */,
+				279446211CC67A90009358FA /* AnimationDelegate.swift in Sources */,
+				279446241CC67F53009358FA /* UIView+IBInspectable.swift in Sources */,
+				279446221CC67A90009358FA /* CircularRevealAnimator.swift in Sources */,
+				279446281CC6D2A9009358FA /* BlurView.swift in Sources */,
+				2794461E1CC67A2C009358FA /* FinishedButton.swift in Sources */,
 				C71BA9221CC1DC3800C89E3D /* Quote.swift in Sources */,
 				C71BA9201CC1DAFA00C89E3D /* DataService.swift in Sources */,
 			);
@@ -499,6 +523,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.micahlanier.Finish-It";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -511,6 +536,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.micahlanier.Finish-It";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
