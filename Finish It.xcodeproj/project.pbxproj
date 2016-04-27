@@ -14,6 +14,7 @@
 		279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446251CC69B61009358FA /* FinishedQuoteView.swift */; };
 		279446281CC6D2A9009358FA /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446271CC6D2A9009358FA /* BlurView.swift */; };
 		B57482043E6DA3EA00E039D0 /* Pods_Finish_It.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */; };
+		C709061B1CD180F3005D8FFE /* QuoteOfDay.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709061A1CD180F3005D8FFE /* QuoteOfDay.plist */; };
 		C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA91D1CC1DABC00C89E3D /* Constants.swift */; };
 		C71BA9201CC1DAFA00C89E3D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA91F1CC1DAFA00C89E3D /* DataService.swift */; };
 		C71BA9221CC1DC3800C89E3D /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA9211CC1DC3800C89E3D /* Quote.swift */; };
@@ -54,6 +55,7 @@
 		279446271CC6D2A9009358FA /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		8B75667C5ED57EC489518880 /* Pods-Finish It.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finish It.release.xcconfig"; path = "Pods/Target Support Files/Pods-Finish It/Pods-Finish It.release.xcconfig"; sourceTree = "<group>"; };
 		BAAC54189B709908E9D9617E /* Pods-Finish It.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finish It.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Finish It/Pods-Finish It.debug.xcconfig"; sourceTree = "<group>"; };
+		C709061A1CD180F3005D8FFE /* QuoteOfDay.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QuoteOfDay.plist; sourceTree = "<group>"; };
 		C71BA91D1CC1DABC00C89E3D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C71BA91F1CC1DAFA00C89E3D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		C71BA9211CC1DC3800C89E3D /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */,
+				C709061A1CD180F3005D8FFE /* QuoteOfDay.plist */,
 				C75A05E91CC07E5B00FFC983 /* ViewController.swift */,
 				C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */,
 				2794461F1CC67A90009358FA /* AnimationDelegate.swift */,
@@ -292,6 +295,7 @@
 				C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */,
 				C75A05EF1CC07E5B00FFC983 /* Assets.xcassets in Resources */,
 				C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */,
+				C709061B1CD180F3005D8FFE /* QuoteOfDay.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
