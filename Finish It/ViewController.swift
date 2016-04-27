@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import TKSubmitTransition
 import pop
 
 class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol {
