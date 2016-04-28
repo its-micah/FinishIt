@@ -34,4 +34,28 @@ class DataService {
     }
 
 
+    func getQuote() -> String {
+
+        var myDict: NSDictionary?
+        var quote: String?
+        if let path = NSBundle.mainBundle().pathForResource("QuoteOfDay", ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path)
+        }
+
+        let quotes = myDict?.objectForKey("Quotes") as! NSArray
+
+        let today =  NSDate()
+        let formatter = NSDateFormatter.init()
+        formatter.dateStyle = .ShortStyle
+        let startDate = formatter.dateFromString("04/27/16")
+        let cal = NSCalendar.currentCalendar()
+        let unit = NSCalendarUnit.Day
+        let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
+        print(components.day)
+        quote = quotes[components.day] as? String
+
+        return quote!
+    }
+
+
 }
