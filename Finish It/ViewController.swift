@@ -38,10 +38,12 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
 
     override func viewDidAppear(animated: Bool) {
         quoteOfDayLabel.alpha = 0
-        DataService.dataService.QUOTE_OF_DAY_REF.observeEventType(.Value, withBlock: { snapshot in
-            print(snapshot.value)
-            let quoteDict = snapshot.value as! NSDictionary
-            let quote = Quote(quoteText: quoteDict.objectForKey("quoteText") as! String)
+        let quoteRequest = DataService.dataService.getQuote()
+        let quote = Quote(quoteText: quoteRequest)
+//        DataService.dataService.QUOTE_OF_DAY_REF.observeEventType(.Value, withBlock: { snapshot in
+//            print(snapshot.value)
+//            let quoteDict = snapshot.value as! NSDictionary
+//            let quote = Quote(quoteText: quoteDict.objectForKey("quoteText") as! String)
             UIView.animateWithDuration(1.0, animations: {
                 self.quoteOfDayLabel.alpha = 1
                 self.quoteOfDayLabel.text = quote.quoteText
@@ -60,7 +62,7 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
                 self.finishedButton.alpha = 1
             }, completion: nil)
             
-        })
+//        })
 
     }
     
