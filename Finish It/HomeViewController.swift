@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import pop
 
-class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol {
+class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol {
 
     @IBOutlet weak var quoteOfDayLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
@@ -76,7 +76,7 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
             self.resignFirstResponder()
             self.finishedQuoteView.hidden = false
             self.finishedQuoteView.alpha = 1
-            //self.finishedQuoteView.configure("\(self.quoteOfDayLabel.text!) \(self.textField.text!)", name: , image: <#T##UIImage#>)
+            self.finishedQuoteView.configure("\(self.quoteOfDayLabel.text!) \(self.textField.text!)", name: User.appUser.name as String, image: User.appUser.profileImage)
             
             let spring = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
             spring.toValue = NSValue(CGSize: CGSizeMake( 1.1, 1.1))
