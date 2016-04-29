@@ -64,7 +64,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let selectedPath = tableView.indexPathForCell(sender as! UITableViewCell)
         let selectedQuote = quotes[selectedPath!.row] as Quote
-        let vc = segue.destinationViewController as! ViewController
+        let vc = segue.destinationViewController as! HomeViewController
         vc.selectedQuote = selectedQuote.quoteText
     }
 
