@@ -12,13 +12,8 @@ class User: NSObject {
     
     var name: NSString!
     var profileImage: UIImage!
+    static let appUser = User()
     
-    init(userName: String, image: UIImage) {
-        super.init()
-        self.name = userName
-        self.profileImage = image
-        save()
-    }
 
     func save() {
         if let image = profileImage {
