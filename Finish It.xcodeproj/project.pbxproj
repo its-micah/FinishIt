@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270AAFE91CD3C1AA0029C442 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AAFE81CD3C1AA0029C442 /* User.swift */; };
+		270AAFEB1CD3C3250029C442 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270AAFEA1CD3C3250029C442 /* ProfileViewController.swift */; };
 		2794461E1CC67A2C009358FA /* FinishedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794461D1CC67A2C009358FA /* FinishedButton.swift */; };
 		279446211CC67A90009358FA /* AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794461F1CC67A90009358FA /* AnimationDelegate.swift */; };
 		279446221CC67A90009358FA /* CircularRevealAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279446201CC67A90009358FA /* CircularRevealAnimator.swift */; };
@@ -19,7 +21,7 @@
 		C71BA9201CC1DAFA00C89E3D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA91F1CC1DAFA00C89E3D /* DataService.swift */; };
 		C71BA9221CC1DC3800C89E3D /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71BA9211CC1DC3800C89E3D /* Quote.swift */; };
 		C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */; };
-		C75A05EA1CC07E5B00FFC983 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E91CC07E5B00FFC983 /* ViewController.swift */; };
+		C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */; };
 		C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05EB1CC07E5B00FFC983 /* Main.storyboard */; };
 		C75A05EF1CC07E5B00FFC983 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */; };
 		C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270AAFE81CD3C1AA0029C442 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		270AAFEA1CD3C3250029C442 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2794461D1CC67A2C009358FA /* FinishedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedButton.swift; sourceTree = "<group>"; };
 		2794461F1CC67A90009358FA /* AnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDelegate.swift; sourceTree = "<group>"; };
 		279446201CC67A90009358FA /* CircularRevealAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularRevealAnimator.swift; sourceTree = "<group>"; };
@@ -61,7 +65,7 @@
 		C71BA9211CC1DC3800C89E3D /* Quote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		C75A05E41CC07E5B00FFC983 /* Finish It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finish It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C75A05E91CC07E5B00FFC983 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C75A05EC1CC07E5B00FFC983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C75A05F11CC07E5B00FFC983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -138,7 +142,7 @@
 			children = (
 				C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */,
 				C709061A1CD180F3005D8FFE /* QuoteOfDay.plist */,
-				C75A05E91CC07E5B00FFC983 /* ViewController.swift */,
+				C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */,
 				C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */,
 				2794461F1CC67A90009358FA /* AnimationDelegate.swift */,
 				279446201CC67A90009358FA /* CircularRevealAnimator.swift */,
@@ -149,7 +153,9 @@
 				C71BA91D1CC1DABC00C89E3D /* Constants.swift */,
 				C71BA91F1CC1DAFA00C89E3D /* DataService.swift */,
 				C71BA9211CC1DC3800C89E3D /* Quote.swift */,
+				270AAFE81CD3C1AA0029C442 /* User.swift */,
 				279446251CC69B61009358FA /* FinishedQuoteView.swift */,
+				270AAFEA1CD3C3250029C442 /* ProfileViewController.swift */,
 				C75A05EB1CC07E5B00FFC983 /* Main.storyboard */,
 				C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */,
 				C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */,
@@ -368,17 +374,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C75A05EA1CC07E5B00FFC983 /* ViewController.swift in Sources */,
+				C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */,
 				279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */,
 				C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */,
 				C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */,
 				C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */,
 				C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */,
+				270AAFE91CD3C1AA0029C442 /* User.swift in Sources */,
 				279446211CC67A90009358FA /* AnimationDelegate.swift in Sources */,
 				279446241CC67F53009358FA /* UIView+IBInspectable.swift in Sources */,
 				279446221CC67A90009358FA /* CircularRevealAnimator.swift in Sources */,
 				279446281CC6D2A9009358FA /* BlurView.swift in Sources */,
 				2794461E1CC67A2C009358FA /* FinishedButton.swift in Sources */,
+				270AAFEB1CD3C3250029C442 /* ProfileViewController.swift in Sources */,
 				C71BA9221CC1DC3800C89E3D /* Quote.swift in Sources */,
 				C71BA9201CC1DAFA00C89E3D /* DataService.swift in Sources */,
 			);
