@@ -15,8 +15,11 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
     @IBOutlet weak var quoteOfDayLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var quotesButton: UIButton!
     let ref = Firebase(url: "https://finishit.firebaseIO.com")
     var quote = Quote(quoteText:"")
+    var selectedQuote: String?
+    var quoteSelected: Bool?
     @IBOutlet var finishedButton: FinishedButton!
     @IBOutlet weak var finishedQuoteView: FinishedQuoteView!
     @IBOutlet weak var blurView: BlurView!
@@ -37,32 +40,31 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
     }
 
     override func viewDidAppear(animated: Bool) {
-        quoteOfDayLabel.alpha = 0
-        let quoteRequest = DataService.dataService.getQuote()
-        let quote = Quote(quoteText: quoteRequest)
-//        DataService.dataService.QUOTE_OF_DAY_REF.observeEventType(.Value, withBlock: { snapshot in
-//            print(snapshot.value)
-//            let quoteDict = snapshot.value as! NSDictionary
-//            let quote = Quote(quoteText: quoteDict.objectForKey("quoteText") as! String)
-            UIView.animateWithDuration(1.0, animations: {
-                self.quoteOfDayLabel.alpha = 1
-                self.quoteOfDayLabel.text = quote.quoteText
-            })
 
-                let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
-                spring.toValue = 100
-                spring.springBounciness = 20
-                spring.springSpeed = 2
-                spring.beginTime = (CACurrentMediaTime() + 1)
-                self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
+        if quoteSelected == false || quoteSelected == nil {
+            quoteOfDayLabel.alpha = 0
+            let quoteRequest = DataService.dataService.getQuote()
+            let quote = Quote(quoteText: quoteRequest)
+
+                UIView.animateWithDuration(1.0, animations: {
+                    self.quoteOfDayLabel.alpha = 1
+                    self.quoteOfDayLabel.text = quote.quoteText
+                })
+
+                    let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+                    spring.toValue = 100
+                    spring.springBounciness = 20
+                    spring.springSpeed = 2
+                    spring.beginTime = (CACurrentMediaTime() + 1)
+                    self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
+                
+                UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
+                    self.lineView.alpha = 1
+                    self.textField.alpha = 1
+                    self.finishedButton.alpha = 1
+                }, completion: nil)
             
-            UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
-                self.lineView.alpha = 1
-                self.textField.alpha = 1
-                self.finishedButton.alpha = 1
-            }, completion: nil)
-            
-//        })
+        }
 
     }
     
@@ -81,6 +83,7 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
             self.finishedQuoteView.layer.pop_addAnimation(spring, forKey: "moveDown")
             UIView.animateWithDuration(0.5, animations: {
                 self.blurView.animate()
+                self.quotesButton.enabled = false
             })
             
         }
@@ -108,9 +111,36 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
         UIView.animateWithDuration(0.5) { 
             self.blurView.alpha = 0
         }
-        UIView.animateWithDuration(0.4) { 
+        UIView.animateWithDuration(0.4, animations: { 
             self.finishedQuoteView.alpha = 0
+            }) { (true) in
+                self.quotesButton.enabled = true
         }
+    }
+
+    @IBAction func loadSelectedQuote(segue:UIStoryboardSegue) {
+
+        quoteSelected = true
+
+        if quoteSelected == true {
+            UIView.animateWithDuration(1.0, animations: {
+                self.quoteOfDayLabel.alpha = 1
+                self.quoteOfDayLabel.text = self.selectedQuote
+            })
+
+            let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+            spring.toValue = 100
+            spring.springBounciness = 20
+            spring.springSpeed = 2
+            spring.beginTime = (CACurrentMediaTime() + 1)
+            self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
+
+            UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
+                self.lineView.alpha = 1
+                self.textField.alpha = 1
+                self.finishedButton.alpha = 1
+                }, completion: nil)
+            }
     }
 
 
