@@ -47,11 +47,25 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         return quotes.count
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let selectedQuote = quotes[indexPath.row] as Quote
-        let createQuoteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("CreateQuoteVC") as! CreateQuoteViewController
-        createQuoteVC.quote = selectedQuote.quoteText
-        self.navigationController?.pushViewController(createQuoteVC, animated: true)
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let selectedQuote = quotes[indexPath.row] as Quote
+//
+//    }
+
+    
+    @IBAction func onCloseButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let selectedPath = tableView.indexPathForCell(sender as! UITableViewCell)
+        let selectedQuote = quotes[selectedPath!.row] as Quote
+        let vc = segue.destinationViewController as! ViewController
+        vc.selectedQuote = selectedQuote.quoteText
     }
 
 }
