@@ -20,6 +20,7 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
     var quote = Quote(quoteText:"")
     var selectedQuote: String?
     var quoteSelected: Bool?
+    var user: User?
     @IBOutlet var finishedButton: FinishedButton!
     @IBOutlet weak var finishedQuoteView: FinishedQuoteView!
     @IBOutlet weak var blurView: BlurView!
@@ -75,7 +76,8 @@ class ViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtoc
             self.resignFirstResponder()
             self.finishedQuoteView.hidden = false
             self.finishedQuoteView.alpha = 1
-            self.finishedQuoteView.quoteLabel.text = "\(self.quoteOfDayLabel.text!) \(self.textField.text!)"
+            //self.finishedQuoteView.configure("\(self.quoteOfDayLabel.text!) \(self.textField.text!)", name: , image: <#T##UIImage#>)
+            
             let spring = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
             spring.toValue = NSValue(CGSize: CGSizeMake( 1.1, 1.1))
             spring.springBounciness = 10
