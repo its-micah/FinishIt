@@ -16,6 +16,7 @@ class FinishedQuoteView: UIView {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var quoteLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     var delegate : FinishedQuoteViewProtocol?
 
     /*
@@ -26,11 +27,19 @@ class FinishedQuoteView: UIView {
     }
     */
     
+    func configure(quote: String, name: String, image: UIImage) {
+        self.userImageView.image = image
+        self.quoteLabel.text = quote
+        self.nameLabel.text = name
+    }
+    
     @IBAction func onShareButtonTapped(sender: UIButton) {
         print("share")
-        UIGraphicsBeginImageContext(CGSizeMake(self.frame.size.width, self.frame.size.height))
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        self.layer.renderInContext(context)
+        //UIGraphicsBeginImageContext(CGSizeMake(self.frame.size.width, self.frame.size.height))
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
+        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
+//        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+//        self.layer.renderInContext(context)
         let screenShot: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let TwitterText = "#FinishIt"
