@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
-    
+    var user: User?
     let imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
@@ -44,8 +44,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func onFinishedButtonTapped(sender: AnyObject) {
-        let user = User(userName: usernameTextField.text!, image: profileImageView.image!)
-        print(user.name)
+        self.user = User.appUser
+        self.user?.name = usernameTextField.text
+        self.user?.profileImage = profileImageView.image
+        print(user!.name)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -55,9 +57,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
    
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-    }
+    
     
 
 }
