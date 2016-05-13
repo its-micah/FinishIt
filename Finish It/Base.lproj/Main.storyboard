@@ -7,6 +7,17 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Sentinel-Book.otf">
+            <string>Sentinel-Book</string>
+            <string>Sentinel-Book</string>
+            <string>Sentinel-Book</string>
+        </mutableArray>
+        <mutableArray key="TypeTogether - EskapadeFraktur.otf">
+            <string>EskapadeFraktur</string>
+            <string>EskapadeFraktur</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--List View Controller-->
         <scene sceneID="LuZ-dj-ugf">
@@ -89,8 +100,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHq-oM-XWo">
-                                <rect key="frame" x="16" y="127" width="288" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="127" width="288" height="22"/>
+                                <fontDescription key="fontDescription" name="Sentinel-Book" family="Sentinel" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -99,6 +110,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nfh-j9-3Ot"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="EskapadeFraktur" family="Eskapade Fraktur" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="It is Finished">
                                     <color key="titleColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -118,11 +131,11 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="finish it." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Fs-hr-oUE">
-                                <rect key="frame" x="48" y="156" width="224" height="19"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="48" y="157" width="224" height="20"/>
+                                <fontDescription key="fontDescription" name="Sentinel-Book" family="Sentinel" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-x7-dgl">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-x7-dgl">
                                 <rect key="frame" x="48" y="183" width="224" height="2"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -136,9 +149,6 @@
                                     <outletCollection property="gestureRecognizers" destination="xt5-qw-n2w" appends="YES" id="lMj-oO-p3F"/>
                                 </connections>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQJ-R1-ECD">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                            </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-S3-TP2" customClass="FinishedQuoteView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="48" y="156" width="224" height="256"/>
                                 <subviews>
@@ -156,7 +166,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSU-Rg-n0F">
                                         <rect key="frame" x="28" y="117" width="168" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="Sentinel-Book" family="Sentinel" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -174,8 +184,8 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLs-Er-sZ2">
-                                        <rect key="frame" x="71" y="30.5" width="145" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="71" y="29.5" width="145" height="21.5"/>
+                                        <fontDescription key="fontDescription" name="EskapadeFraktur" family="Eskapade Fraktur" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -204,6 +214,9 @@
                                     <outlet property="userImageView" destination="eRM-5X-k4L" id="os4-DB-5Jj"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQJ-R1-ECD">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAo-G1-tM7">
                                 <rect key="frame" x="227" y="513" width="53" height="30"/>
                                 <constraints>
