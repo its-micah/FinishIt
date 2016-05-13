@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="SEz-xK-geU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="SEz-xK-geU">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -136,6 +136,9 @@
                                     <outletCollection property="gestureRecognizers" destination="xt5-qw-n2w" appends="YES" id="lMj-oO-p3F"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQJ-R1-ECD">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5S-S3-TP2" customClass="FinishedQuoteView" customModule="Finish_It" customModuleProvider="target">
                                 <rect key="frame" x="48" y="156" width="224" height="256"/>
                                 <subviews>
@@ -215,18 +218,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="4tR-n5-55O" firstAttribute="top" secondItem="SQJ-R1-ECD" secondAttribute="bottom" id="0JN-6U-OZy"/>
                             <constraint firstItem="aHq-oM-XWo" firstAttribute="trailing" secondItem="ssI-Kb-Fl1" secondAttribute="trailingMargin" id="22T-t7-bcS"/>
                             <constraint firstItem="a7v-x7-dgl" firstAttribute="leading" secondItem="1Fs-hr-oUE" secondAttribute="leading" id="4Zs-6F-qvO"/>
                             <constraint firstItem="a7v-x7-dgl" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="75j-zs-CeK"/>
                             <constraint firstItem="a7v-x7-dgl" firstAttribute="top" secondItem="1Fs-hr-oUE" secondAttribute="bottom" constant="8" id="76N-DB-GXG"/>
+                            <constraint firstItem="SQJ-R1-ECD" firstAttribute="top" secondItem="AJu-fv-qFo" secondAttribute="bottom" id="7Zf-4T-gi1"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="width" secondItem="ssI-Kb-Fl1" secondAttribute="width" multiplier="0.7" id="8fs-Uo-xqx"/>
                             <constraint firstItem="1Fs-hr-oUE" firstAttribute="top" secondItem="aHq-oM-XWo" secondAttribute="bottom" constant="8" id="8vr-GE-Dq2"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="centerY" secondItem="ssI-Kb-Fl1" secondAttribute="centerY" id="9RH-WJ-psr"/>
                             <constraint firstItem="eOg-xm-b53" firstAttribute="top" secondItem="ssI-Kb-Fl1" secondAttribute="topMargin" id="Bj5-PC-mcb"/>
+                            <constraint firstAttribute="trailing" secondItem="SQJ-R1-ECD" secondAttribute="trailing" id="I6B-vY-qDD"/>
                             <constraint firstItem="neY-qT-q1F" firstAttribute="centerY" secondItem="ssI-Kb-Fl1" secondAttribute="centerY" id="RN5-F7-NeK"/>
                             <constraint firstItem="1Fs-hr-oUE" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="X5Z-mT-ff1"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="height" secondItem="ssI-Kb-Fl1" secondAttribute="height" multiplier="0.45" id="Zaj-DV-MYo"/>
                             <constraint firstItem="4tR-n5-55O" firstAttribute="top" secondItem="eOg-xm-b53" secondAttribute="bottom" id="Zta-Cw-i6Q"/>
+                            <constraint firstItem="SQJ-R1-ECD" firstAttribute="leading" secondItem="ssI-Kb-Fl1" secondAttribute="leading" id="bQA-2U-HQ1"/>
                             <constraint firstItem="neY-qT-q1F" firstAttribute="width" secondItem="ssI-Kb-Fl1" secondAttribute="width" multiplier="0.65" id="d4u-Ia-wu7"/>
                             <constraint firstItem="eOg-xm-b53" firstAttribute="leading" secondItem="ssI-Kb-Fl1" secondAttribute="leading" id="d9J-Md-8Pb"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="hZI-j0-cn4"/>
@@ -249,9 +256,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="animationImageView" destination="SQJ-R1-ECD" id="YB1-Au-uhx"/>
                         <outlet property="blurView" destination="eOg-xm-b53" id="rmi-ra-FRx"/>
                         <outlet property="finishedButton" destination="neY-qT-q1F" id="cfj-0k-izP"/>
                         <outlet property="finishedQuoteView" destination="W5S-S3-TP2" id="hyH-Zv-MIg"/>
+                        <outlet property="headingLabel" destination="aHq-oM-XWo" id="iKS-1T-Izt"/>
                         <outlet property="lineView" destination="a7v-x7-dgl" id="kjU-cB-axh"/>
                         <outlet property="quoteLabelTopConstraint" destination="wuA-xp-upT" id="43S-D7-nIc"/>
                         <outlet property="quoteOfDayLabel" destination="aHq-oM-XWo" id="beQ-hp-xej"/>
