@@ -23,6 +23,7 @@
 		C73182E91CE65E5800618E24 /* thunder.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C73182E71CE65E5800618E24 /* thunder.mp3 */; };
 		C73182EA1CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf in Resources */ = {isa = PBXBuildFile; fileRef = C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */; };
 		C73182EB1CE65E5C00618E24 /* Sentinel-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = C73182E61CE65E4700618E24 /* Sentinel-Book.otf */; };
+		C73182ED1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */; };
 		C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */; };
 		C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */; };
 		C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05EB1CC07E5B00FFC983 /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 		C73182E61CE65E4700618E24 /* Sentinel-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sentinel-Book.otf"; sourceTree = "<group>"; };
 		C73182E71CE65E5800618E24 /* thunder.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = thunder.mp3; sourceTree = "<group>"; };
 		C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TypeTogether - EskapadeFraktur.otf"; sourceTree = "<group>"; };
+		C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = savedQuoteAnimationImages.xcassets; sourceTree = "<group>"; };
 		C75A05E41CC07E5B00FFC983 /* Finish It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finish It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */,
 				C75A05EB1CC07E5B00FFC983 /* Main.storyboard */,
 				C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */,
+				C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */,
 				C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */,
 				C75A05F31CC07E5B00FFC983 /* Info.plist */,
 			);
@@ -308,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C73182EB1CE65E5C00618E24 /* Sentinel-Book.otf in Resources */,
+				C73182ED1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets in Resources */,
 				C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */,
 				C73182E91CE65E5800618E24 /* thunder.mp3 in Resources */,
 				C75A05EF1CC07E5B00FFC983 /* Assets.xcassets in Resources */,
