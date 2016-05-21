@@ -24,6 +24,7 @@
 		C73182EA1CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf in Resources */ = {isa = PBXBuildFile; fileRef = C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */; };
 		C73182EB1CE65E5C00618E24 /* Sentinel-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = C73182E61CE65E4700618E24 /* Sentinel-Book.otf */; };
 		C73182ED1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */; };
+		C73182EF1CE6D2D600618E24 /* DeviceMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73182EE1CE6D2D600618E24 /* DeviceMacros.swift */; };
 		C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */; };
 		C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */; };
 		C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05EB1CC07E5B00FFC983 /* Main.storyboard */; };
@@ -31,8 +32,14 @@
 		C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */; };
 		C75A05FD1CC07E5B00FFC983 /* Finish_ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05FC1CC07E5B00FFC983 /* Finish_ItTests.swift */; };
 		C75A06081CC07E5B00FFC983 /* Finish_ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */; };
+		C76E286F1CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
+		C76E28701CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
+		C76E28711CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
+		C78115A61CED6E4E00C65AF1 /* Sentinel-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */; };
+		C78616DB1CE8317500A31925 /* Peak_Button1.wav in Resources */ = {isa = PBXBuildFile; fileRef = C78616DA1CE8317500A31925 /* Peak_Button1.wav */; };
 		C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */; };
 		C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */; };
+		C7D4A8431CE9524C00B1B556 /* Sentinel-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +78,7 @@
 		C73182E71CE65E5800618E24 /* thunder.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = thunder.mp3; sourceTree = "<group>"; };
 		C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TypeTogether - EskapadeFraktur.otf"; sourceTree = "<group>"; };
 		C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = savedQuoteAnimationImages.xcassets; sourceTree = "<group>"; };
+		C73182EE1CE6D2D600618E24 /* DeviceMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMacros.swift; sourceTree = "<group>"; };
 		C75A05E41CC07E5B00FFC983 /* Finish It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Finish It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -84,8 +92,12 @@
 		C75A06031CC07E5B00FFC983 /* Finish ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Finish ItUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finish_ItUITests.swift; sourceTree = "<group>"; };
 		C75A06091CC07E5B00FFC983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sentinel-Semibold.otf"; sourceTree = "<group>"; };
+		C78616DA1CE8317500A31925 /* Peak_Button1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Peak_Button1.wav; sourceTree = "<group>"; };
 		C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
 		C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sentinel-Medium.otf"; sourceTree = "<group>"; };
 		ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Finish_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,12 +173,17 @@
 				C71BA91D1CC1DABC00C89E3D /* Constants.swift */,
 				C71BA91F1CC1DAFA00C89E3D /* DataService.swift */,
 				C71BA9211CC1DC3800C89E3D /* Quote.swift */,
+				C73182EE1CE6D2D600618E24 /* DeviceMacros.swift */,
 				270AAFE81CD3C1AA0029C442 /* User.swift */,
+				C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */,
 				279446251CC69B61009358FA /* FinishedQuoteView.swift */,
 				270AAFEA1CD3C3250029C442 /* ProfileViewController.swift */,
 				C73182E61CE65E4700618E24 /* Sentinel-Book.otf */,
 				C73182E71CE65E5800618E24 /* thunder.mp3 */,
 				C73182E81CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf */,
+				C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */,
+				C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */,
+				C78616DA1CE8317500A31925 /* Peak_Button1.wav */,
 				C75A05EB1CC07E5B00FFC983 /* Main.storyboard */,
 				C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */,
 				C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */,
@@ -310,12 +327,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7D4A8431CE9524C00B1B556 /* Sentinel-Medium.otf in Resources */,
 				C73182EB1CE65E5C00618E24 /* Sentinel-Book.otf in Resources */,
+				C78115A61CED6E4E00C65AF1 /* Sentinel-Semibold.otf in Resources */,
 				C73182ED1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets in Resources */,
 				C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */,
+				C78616DB1CE8317500A31925 /* Peak_Button1.wav in Resources */,
 				C73182E91CE65E5800618E24 /* thunder.mp3 in Resources */,
 				C75A05EF1CC07E5B00FFC983 /* Assets.xcassets in Resources */,
 				C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */,
+				C76E286F1CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 				C709061B1CD180F3005D8FFE /* QuoteOfDay.plist in Resources */,
 				C73182EA1CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf in Resources */,
 			);
@@ -325,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76E28701CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76E28711CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +415,7 @@
 			files = (
 				C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */,
 				279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */,
+				C73182EF1CE6D2D600618E24 /* DeviceMacros.swift in Sources */,
 				C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */,
 				C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */,
 				C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */,
