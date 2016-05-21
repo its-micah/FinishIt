@@ -44,10 +44,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func onFinishedButtonTapped(sender: AnyObject) {
-        self.user = User.appUser
-        self.user?.name = usernameTextField.text
-        self.user?.profileImage = profileImageView.image
-        print(user!.name)
+
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
