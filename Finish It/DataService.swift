@@ -7,31 +7,9 @@
 //
 
 import Foundation
-import Firebase
 
 class DataService {
     static let dataService = DataService()
-
-    private var _BASE_REF = Firebase(url: "\(BASE_URL)")
-    private var _QUOTE_REF = Firebase(url: "\(BASE_URL)/Quotes")
-    private var _QUOTE_OF_DAY_REF = Firebase(url: "\(BASE_URL)/Quotes/quoteOfDay")
-    private var _QUOTE_LIST_REF = Firebase(url: "\(BASE_URL)/Quotes/quoteList")
-
-    var BASE_REF: Firebase {
-        return _BASE_REF
-    }
-
-    var QUOTE_REF: Firebase {
-        return _QUOTE_REF
-    }
-
-    var QUOTE_OF_DAY_REF: Firebase {
-        return _QUOTE_OF_DAY_REF
-    }
-
-    var QUOTE_LIST_REF: Firebase {
-        return _QUOTE_LIST_REF
-    }
 
 
     func getQuote() -> String {
@@ -47,7 +25,7 @@ class DataService {
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
         formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("05/05/16")
+        let startDate = formatter.dateFromString("05/31/16")
         let cal = NSCalendar.currentCalendar()
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
@@ -56,6 +34,59 @@ class DataService {
 
         return quote!
     }
+
+
+    func getQuoteList() -> Array<Quote> {
+
+        var myDict: NSDictionary?
+        if let path = NSBundle.mainBundle().pathForResource("QuoteOfDay", ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path)
+        }
+
+        var quoteArray: Array<Quote> = []
+
+        let quotes = myDict?.objectForKey("Quotes") as! NSArray
+
+        let today =  NSDate()
+        let formatter = NSDateFormatter.init()
+        formatter.dateStyle = .ShortStyle
+        let startDate = formatter.dateFromString("05/12/16")
+        let cal = NSCalendar.currentCalendar()
+        let unit = NSCalendarUnit.Day
+        let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
+        print(components.day)
+        var index = components.day
+        var counter:Int = 0
+
+        if index > quotes.count {
+            index = 15
+        }
+
+        for q in quotes {
+            if counter > index - 15 && counter < index {
+                let quote = Quote(quoteText: q as! String)
+                quoteArray.append(quote)
+            }
+            counter += 1
+        }
+
+
+        
+        return quoteArray
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

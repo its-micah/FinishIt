@@ -7,39 +7,41 @@
 //
 
 import UIKit
-import Firebase
 
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     var quotes = [Quote]()
 
     override func viewDidLoad() {
 
         tableView.delegate = self
 
-        DataService.dataService.QUOTE_LIST_REF.observeEventType(.Value, withBlock: { snapshot in
-            self.quotes = []
-
-            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
-                for snap in snapshots {
-                    if let quoteDictionary = snap.value as? NSDictionary {
-                        let quote = Quote(quoteText: quoteDictionary.objectForKey("quoteText") as! String)
-                        // Items are returned chronologically, but it's more fun with the newest jokes first.
-
-                        self.quotes.insert(quote, atIndex: 0)
-                    }
-                }
-            }
-            print(self.quotes.count)
-            self.tableView.reloadData()
-        })
+//        DataService.dataService.QUOTE_LIST_REF.observeEventType(.Value, withBlock: { snapshot in
+//            self.quotes = []
+//
+//            if let snapshots = snapshot.children.allObjects as? [FDataSnapshot] {
+//                for snap in snapshots {
+//                    if let quoteDictionary = snap.value as? NSDictionary {
+//                        let quote = Quote(quoteText: quoteDictionary.objectForKey("quoteText") as! String)
+//                        // Items are returned chronologically, but it's more fun with the newest jokes first.
+//
+//                        self.quotes.insert(quote, atIndex: 0)
+//                    }
+//                }
+//            }
+//            print(self.quotes.count)
+        self.quotes = DataService.dataService.getQuoteList()
+        self.tableView.reloadData()
+        
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let quote = quotes[indexPath.row]
         cell.textLabel?.text = quote.quoteText
+        cell.textLabel?.font = UIFont(name: "Sentinel", size: 18)
         return cell
     }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class User: NSObject {
     
-    var name: NSString!
+    var name: String!
     var profileImage: UIImage!
     static let appUser = User()
     

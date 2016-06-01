@@ -16,7 +16,6 @@ class FinishedQuoteView: UIView {
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var quoteLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     var delegate : FinishedQuoteViewProtocol?
 
     /*
@@ -27,24 +26,50 @@ class FinishedQuoteView: UIView {
     }
     */
     
-    func configure(quote: String, name: String, image: UIImage) {
-        self.userImageView.image = image
-        self.quoteLabel.text = quote
-        self.nameLabel.text = name
+    func configure(quote: NSMutableAttributedString) {
+        self.quoteLabel.attributedText = quote
     }
     
     @IBAction func onShareButtonTapped(sender: UIButton) {
         print("share")
-        //UIGraphicsBeginImageContext(CGSizeMake(self.frame.size.width, self.frame.size.height))
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
-        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
-//        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-//        self.layer.renderInContext(context)
-        let screenShot: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsBeginImageContext(CGSizeMake(500, 500))
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 500, height: 500), false, 0)
+        let context: CGContextRef = UIGraphicsGetCurrentContext()!
+        CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+        // 2
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .Left
+
+        // 3
+//        let attrs = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 36)!, NSParagraphStyleAttributeName: paragraphStyle]
+
+        // 4
+        let string = self.quoteLabel.attributedText
+
+        string?.drawWithRect(CGRect(x: 32, y: 32, width: 448, height: 448), options: .UsesLineFragmentOrigin, context: nil)
+
+        // 5
+        let mouse = UIImage(named: "eye")
+        mouse?.drawAtPoint(CGPoint(x: 300, y: 150))
+
+        // 6
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+
         UIGraphicsEndImageContext()
-        let TwitterText = "#FinishIt"
-        delegate?.showSharingWithImageAndText(screenShot, text: TwitterText)
         
+        // 7
+        let TwitterText = "#ItIsFinishedApp"
+        delegate?.showSharingWithImageAndText(img, text: TwitterText)
+
+
+//        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
+//        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
+//
+//        let screenShot: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        let TwitterText = "#FinishIt"
+//        delegate?.showSharingWithImageAndText(screenShot, text: TwitterText)
+
     }
 
 }

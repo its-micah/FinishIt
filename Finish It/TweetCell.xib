@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="TypeTogether - EskapadeFraktur.otf">
+            <string>EskapadeFraktur</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="446" id="JPl-xe-pQZ" customClass="TweetTableViewCell" customModule="Finish_It" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="431" height="446"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JPl-xe-pQZ" id="u7E-fv-INT">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="445.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o68-Ou-Os9">
+                        <rect key="frame" x="46" y="97" width="338" height="323"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wizardTransparent" translatesAutoresizingMaskIntoConstraints="NO" id="Kfm-TW-0gn">
+                        <rect key="frame" x="46" y="28" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="nIA-F8-kS9"/>
+                            <constraint firstAttribute="height" constant="48" id="wOF-Oq-uRp"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="24"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nu3-GW-4QN">
+                        <rect key="frame" x="111" y="38.5" width="38.5" height="26.5"/>
+                        <fontDescription key="fontDescription" name="EskapadeFraktur" family="Eskapade Fraktur" pointSize="21"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Kfm-TW-0gn" firstAttribute="top" secondItem="u7E-fv-INT" secondAttribute="top" constant="28" id="1f1-9f-dU7"/>
+                    <constraint firstItem="o68-Ou-Os9" firstAttribute="width" secondItem="u7E-fv-INT" secondAttribute="width" multiplier="0.75" constant="14.75" id="AtJ-PR-4Xs"/>
+                    <constraint firstItem="Nu3-GW-4QN" firstAttribute="centerY" secondItem="Kfm-TW-0gn" secondAttribute="centerY" constant="-0.5" id="FyJ-3f-aii"/>
+                    <constraint firstItem="o68-Ou-Os9" firstAttribute="top" secondItem="Kfm-TW-0gn" secondAttribute="bottom" constant="21" id="IyV-QH-5AY"/>
+                    <constraint firstItem="Kfm-TW-0gn" firstAttribute="leading" secondItem="o68-Ou-Os9" secondAttribute="leading" id="Jb2-iA-nti"/>
+                    <constraint firstItem="Nu3-GW-4QN" firstAttribute="leading" secondItem="Kfm-TW-0gn" secondAttribute="trailing" constant="17" id="U7N-eX-TfF"/>
+                    <constraint firstItem="o68-Ou-Os9" firstAttribute="centerX" secondItem="u7E-fv-INT" secondAttribute="centerX" id="ZqO-cA-o2H"/>
+                    <constraint firstAttribute="bottom" secondItem="o68-Ou-Os9" secondAttribute="bottom" constant="25.5" id="dAq-xO-eDk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tweetImageView" destination="o68-Ou-Os9" id="gnH-dP-6OQ"/>
+                <outlet property="userImageView" destination="Kfm-TW-0gn" id="WMV-mh-zDa"/>
+                <outlet property="usernameLabel" destination="Nu3-GW-4QN" id="PEe-Dn-abJ"/>
+            </connections>
+            <point key="canvasLocation" x="295.5" y="449"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="wizardTransparent" width="180" height="180"/>
+    </resources>
+</document>
