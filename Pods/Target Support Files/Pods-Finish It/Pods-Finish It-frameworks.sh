@@ -84,10 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-Finish It/Firebase.framework"
+  install_framework "Pods-Finish It/Kingfisher.framework"
   install_framework "Pods-Finish It/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-Finish It/Firebase.framework"
+  install_framework "Pods-Finish It/Kingfisher.framework"
   install_framework "Pods-Finish It/pop.framework"
 fi

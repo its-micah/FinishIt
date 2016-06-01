@@ -32,12 +32,15 @@
 		C75A05F21CC07E5B00FFC983 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C75A05F01CC07E5B00FFC983 /* LaunchScreen.storyboard */; };
 		C75A05FD1CC07E5B00FFC983 /* Finish_ItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A05FC1CC07E5B00FFC983 /* Finish_ItTests.swift */; };
 		C75A06081CC07E5B00FFC983 /* Finish_ItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */; };
-		C76E286F1CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
-		C76E28701CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
-		C76E28711CED14EE0078BC42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */; };
 		C78115A61CED6E4E00C65AF1 /* Sentinel-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */; };
 		C78616DB1CE8317500A31925 /* Peak_Button1.wav in Resources */ = {isa = PBXBuildFile; fileRef = C78616DA1CE8317500A31925 /* Peak_Button1.wav */; };
 		C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */; };
+		C7C890841CF0D66700A40024 /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C8907D1CF0D63B00A40024 /* SwifteriOS.framework */; };
+		C7C890871CF0E5C600A40024 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C890861CF0E5C600A40024 /* TweetsViewController.swift */; };
+		C7C8908E1CF0E62300A40024 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8908D1CF0E62300A40024 /* TweetTableViewCell.swift */; };
+		C7C890901CF50C3300A40024 /* ImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C8908F1CF50C3300A40024 /* ImageViewExtensions.swift */; };
+		C7C890921CF50DCE00A40024 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C890911CF50DCE00A40024 /* Tweet.swift */; };
+		C7C890941CF67ADE00A40024 /* TweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7C890931CF67ADE00A40024 /* TweetCell.xib */; };
 		C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */; };
 		C7D4A8431CE9524C00B1B556 /* Sentinel-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = C75A05E31CC07E5B00FFC983;
 			remoteInfo = "Finish It";
+		};
+		C7C8907A1CF0D63B00A40024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B300C1F1944AA1A00993175;
+			remoteInfo = SwifterDemoiOS;
+		};
+		C7C8907C1CF0D63B00A40024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B9F50EE1944A5AB00894629;
+			remoteInfo = SwifteriOS;
+		};
+		C7C8907E1CF0D63B00A40024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B9F51131944A61D00894629;
+			remoteInfo = SwifterMac;
+		};
+		C7C890801CF0D63B00A40024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8B300C471944AECB00993175;
+			remoteInfo = SwifterDemoMac;
+		};
+		C7C890821CF0D63B00A40024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6B4D5751C7BAC4500E06514;
+			remoteInfo = SwifterTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -92,10 +130,16 @@
 		C75A06031CC07E5B00FFC983 /* Finish ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Finish ItUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C75A06071CC07E5B00FFC983 /* Finish_ItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finish_ItUITests.swift; sourceTree = "<group>"; };
 		C75A06091CC07E5B00FFC983 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sentinel-Semibold.otf"; sourceTree = "<group>"; };
 		C78616DA1CE8317500A31925 /* Peak_Button1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Peak_Button1.wav; sourceTree = "<group>"; };
 		C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateQuoteViewController.swift; sourceTree = "<group>"; };
+		C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "../../../../../Downloads/Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
+		C7C890861CF0E5C600A40024 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
+		C7C8908D1CF0E62300A40024 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		C7C8908F1CF50C3300A40024 /* ImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtensions.swift; sourceTree = "<group>"; };
+		C7C890911CF50DCE00A40024 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		C7C890931CF67ADE00A40024 /* TweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetCell.xib; sourceTree = "<group>"; };
+		C7CA025C1CF017B50031B9E5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sentinel-Medium.otf"; sourceTree = "<group>"; };
 		ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Finish_It.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7C890841CF0D66700A40024 /* SwifteriOS.framework in Frameworks */,
 				B57482043E6DA3EA00E039D0 /* Pods_Finish_It.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +175,7 @@
 		B4743760363823ECB8A8E2A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7CA025C1CF017B50031B9E5 /* Twitter.framework */,
 				ED831921E4FA0F94474A193A /* Pods_Finish_It.framework */,
 			);
 			name = Frameworks;
@@ -163,19 +209,23 @@
 				C75A05E71CC07E5B00FFC983 /* AppDelegate.swift */,
 				C709061A1CD180F3005D8FFE /* QuoteOfDay.plist */,
 				C75A05E91CC07E5B00FFC983 /* HomeViewController.swift */,
+				C7C890861CF0E5C600A40024 /* TweetsViewController.swift */,
+				C7C8908D1CF0E62300A40024 /* TweetTableViewCell.swift */,
 				C7CB075E1CC2C9E20093C6E4 /* ListViewController.swift */,
+				C7C8908F1CF50C3300A40024 /* ImageViewExtensions.swift */,
 				2794461F1CC67A90009358FA /* AnimationDelegate.swift */,
 				279446201CC67A90009358FA /* CircularRevealAnimator.swift */,
+				C7C890911CF50DCE00A40024 /* Tweet.swift */,
 				2794461D1CC67A2C009358FA /* FinishedButton.swift */,
 				279446271CC6D2A9009358FA /* BlurView.swift */,
 				279446231CC67F53009358FA /* UIView+IBInspectable.swift */,
 				C7ADBA871CC2D6CB006ACC3A /* CreateQuoteViewController.swift */,
+				C7C890931CF67ADE00A40024 /* TweetCell.xib */,
 				C71BA91D1CC1DABC00C89E3D /* Constants.swift */,
 				C71BA91F1CC1DAFA00C89E3D /* DataService.swift */,
 				C71BA9211CC1DC3800C89E3D /* Quote.swift */,
 				C73182EE1CE6D2D600618E24 /* DeviceMacros.swift */,
 				270AAFE81CD3C1AA0029C442 /* User.swift */,
-				C76E286E1CED14EE0078BC42 /* GoogleService-Info.plist */,
 				279446251CC69B61009358FA /* FinishedQuoteView.swift */,
 				270AAFEA1CD3C3250029C442 /* ProfileViewController.swift */,
 				C73182E61CE65E4700618E24 /* Sentinel-Book.otf */,
@@ -184,6 +234,7 @@
 				C78115A51CED6E4E00C65AF1 /* Sentinel-Semibold.otf */,
 				C7D4A8401CE94A3D00B1B556 /* Sentinel-Medium.otf */,
 				C78616DA1CE8317500A31925 /* Peak_Button1.wav */,
+				C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */,
 				C75A05EB1CC07E5B00FFC983 /* Main.storyboard */,
 				C75A05EE1CC07E5B00FFC983 /* Assets.xcassets */,
 				C73182EC1CE661DD00618E24 /* savedQuoteAnimationImages.xcassets */,
@@ -209,6 +260,18 @@
 				C75A06091CC07E5B00FFC983 /* Info.plist */,
 			);
 			path = "Finish ItUITests";
+			sourceTree = "<group>";
+		};
+		C7C890731CF0D63B00A40024 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7C8907B1CF0D63B00A40024 /* SwifterDemoiOS.app */,
+				C7C8907D1CF0D63B00A40024 /* SwifteriOS.framework */,
+				C7C8907F1CF0D63B00A40024 /* SwifterMac.framework */,
+				C7C890811CF0D63B00A40024 /* SwifterDemoMac.app */,
+				C7C890831CF0D63B00A40024 /* SwifterTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C9FF526BE801A4EC380842E3 /* Pods */ = {
@@ -313,6 +376,12 @@
 			mainGroup = C75A05DB1CC07E5B00FFC983;
 			productRefGroup = C75A05E51CC07E5B00FFC983 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C7C890731CF0D63B00A40024 /* Products */;
+					ProjectRef = C7C890721CF0D63B00A40024 /* Swifter.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C75A05E31CC07E5B00FFC983 /* Finish It */,
@@ -321,6 +390,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C7C8907B1CF0D63B00A40024 /* SwifterDemoiOS.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SwifterDemoiOS.app;
+			remoteRef = C7C8907A1CF0D63B00A40024 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C7C8907D1CF0D63B00A40024 /* SwifteriOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwifteriOS.framework;
+			remoteRef = C7C8907C1CF0D63B00A40024 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C7C8907F1CF0D63B00A40024 /* SwifterMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwifterMac.framework;
+			remoteRef = C7C8907E1CF0D63B00A40024 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C7C890811CF0D63B00A40024 /* SwifterDemoMac.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SwifterDemoMac.app;
+			remoteRef = C7C890801CF0D63B00A40024 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C7C890831CF0D63B00A40024 /* SwifterTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwifterTests.xctest;
+			remoteRef = C7C890821CF0D63B00A40024 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C75A05E21CC07E5B00FFC983 /* Resources */ = {
@@ -336,8 +443,8 @@
 				C73182E91CE65E5800618E24 /* thunder.mp3 in Resources */,
 				C75A05EF1CC07E5B00FFC983 /* Assets.xcassets in Resources */,
 				C75A05ED1CC07E5B00FFC983 /* Main.storyboard in Resources */,
-				C76E286F1CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 				C709061B1CD180F3005D8FFE /* QuoteOfDay.plist in Resources */,
+				C7C890941CF67ADE00A40024 /* TweetCell.xib in Resources */,
 				C73182EA1CE65E5800618E24 /* TypeTogether - EskapadeFraktur.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +453,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C76E28701CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +460,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C76E28711CED14EE0078BC42 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,13 +521,17 @@
 				C75A05EA1CC07E5B00FFC983 /* HomeViewController.swift in Sources */,
 				279446261CC69B61009358FA /* FinishedQuoteView.swift in Sources */,
 				C73182EF1CE6D2D600618E24 /* DeviceMacros.swift in Sources */,
+				C7C890901CF50C3300A40024 /* ImageViewExtensions.swift in Sources */,
+				C7C890871CF0E5C600A40024 /* TweetsViewController.swift in Sources */,
 				C75A05E81CC07E5B00FFC983 /* AppDelegate.swift in Sources */,
 				C7ADBA881CC2D6CB006ACC3A /* CreateQuoteViewController.swift in Sources */,
 				C7CB075F1CC2C9E20093C6E4 /* ListViewController.swift in Sources */,
 				C71BA91E1CC1DABC00C89E3D /* Constants.swift in Sources */,
 				270AAFE91CD3C1AA0029C442 /* User.swift in Sources */,
 				279446211CC67A90009358FA /* AnimationDelegate.swift in Sources */,
+				C7C890921CF50DCE00A40024 /* Tweet.swift in Sources */,
 				279446241CC67F53009358FA /* UIView+IBInspectable.swift in Sources */,
+				C7C8908E1CF0E62300A40024 /* TweetTableViewCell.swift in Sources */,
 				279446221CC67A90009358FA /* CircularRevealAnimator.swift in Sources */,
 				279446281CC6D2A9009358FA /* BlurView.swift in Sources */,
 				2794461E1CC67A2C009358FA /* FinishedButton.swift in Sources */,
