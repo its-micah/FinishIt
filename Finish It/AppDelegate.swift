@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 
 @UIApplicationMain
@@ -36,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        let sess = AVAudioSession.sharedInstance()
+        if sess.otherAudioPlaying {
+            _ = try? sess.setCategory(AVAudioSessionCategoryAmbient, withOptions: .DuckOthers)
+            _ = try? sess.setActive(true, withOptions: [])
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

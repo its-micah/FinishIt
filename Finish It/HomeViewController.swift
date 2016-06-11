@@ -11,16 +11,20 @@ import pop
 import AVFoundation
 import SwifteriOS
 
-extension UIViewController {
-    }
 
-class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextFieldDelegate {
+private extension Selector {
+    static let buttonTapped =
+        #selector(HomeViewController.buttonTapped(_:))
+}
+
+
+class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextFieldDelegate, getQuoteProtocol {
 
     @IBOutlet weak var headingLabel: UILabel!
+    @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var quoteOfDayLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var lineView: UIView!
-    @IBOutlet weak var quotesButton: UIButton!
     private var accessToken: String?
     private let consumerKey = "dIS3vBfYpu5a87L6zSLV0ab3f"
     private let consumerSecret = "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939"
@@ -29,7 +33,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     var selectedQuote: String?
     var quoteSelected: Bool?
     var currentUser: User?
-    var areButtonsFanned: Bool?
+    var areButtonsFanned = false
     var dynamicAnimator: UIDynamicAnimator?
     var buttonOne: UIButton?
     var buttonTwo: UIButton?
@@ -42,11 +46,15 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     @IBOutlet weak var blurView: BlurView!
 
     @IBOutlet weak var eyeButton: UIButton!
-    @IBOutlet weak var animationImageView: UIImageView!
+    @IBOutlet weak var animationImageView: AnimationImageView!
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
+    let limitLength = 45
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
         // Do any additional setup after loading the view, typically from a nib.
         self.hideKeyboardWhenTappedAround()
         buttonOne = createButtonWithName("Quotes")
@@ -62,6 +70,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         audioPlayer.prepareToPlay()
 
         quoteOfDayLabel.alpha = 0
+        characterLabel.alpha = 0
         headingLabel.alpha = 0
         quoteLabelTopConstraint.constant = -30
         lineView.alpha = 0
@@ -76,110 +85,13 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         buttonOne?.hidden = true
         buttonTwo?.hidden = true
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        eyeButton.addTarget(self, action: #selector(HomeViewController.fanButtons), forControlEvents: UIControlEvents.TouchUpInside)
-        buttonOne?.addTarget(self, action: #selector(HomeViewController.showQuotes), forControlEvents: .TouchUpInside)
-        buttonTwo?.addTarget(self, action: #selector(HomeViewController.showTweets), forControlEvents: .TouchUpInside)
-//
-//        for familyName in UIFont.familyNames() { if let fn = familyName as? String { for font in UIFont.fontNamesForFamilyName(fn) { print("font: \(font)") } } }
-
-//        let client = TWTRAPIClient()
-//        let statusesShowEndpoint = "https://api.twitter.com/1.1/search/tweets.json?q=%40FinishIt"
-//        let params = ["id": "20"]
-//        var clientError : NSError?
-//
-//        let request = client.URLRequestWithMethod("GET", URL: statusesShowEndpoint, parameters: params, error: &clientError)
-//
-//        client.sendTwitterRequest(request) { (response, data, connectionError) -> Void in
-//            if connectionError != nil {
-//                print("Error: \(connectionError)")
-//            }
-//
-//            do {
-//                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-//                print("json: \(json)")
-//            } catch let jsonError as NSError {
-//                print("json error: \(jsonError.localizedDescription)")
-//            }
-//        }
-
-        swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
-        swifter!.authorizeAppOnlyWithSuccess({ (accessToken, response) -> Void in
-            print("success - access token is \(accessToken)")
-            self.swifter!.getUsersShowWithScreenName("ItIsFinishedApp", includeEntities: true, success: { (user) in
-                if let userDict = user {
-                    if let userId = userDict["id_str"] {
-                        //self.getTwitterStatusWithUserId(userId.string!)
-                        self.getTweetsFromHashtag()
-                    }
-                }
-                }, failure: { (error) in
-                    print(error)
-            })
-            }, failure: { (error) -> Void in
-                print("Error Authenticating: \(error.localizedDescription)")
-        })
-
-    }
-
-    func getTwitterStatusWithUserId(idString: String) {
-        let failureHandler: ((error: NSError) -> Void) = {
-            error in
-            print("Error: \(error.localizedDescription)")
-        }
-
-        swifter!.getStatusesUserTimelineWithUserID(idString, count: 20, sinceID: nil, maxID: nil, trimUser: true, contributorDetails: false, includeEntities: true, success: {
-            (statuses: [JSONValue]?) in
-
-            if statuses != nil {
-
-                var array: Array<Tweet> = []
-
-                for post in statuses! {
-                    let entities = post["extended_entities"] as JSONValue
-                    let media = entities["media"] as JSONValue
-                    let mediaArray = media[0]
-                    let url = mediaArray["media_url"]
-                    print(url)
-                    let tweet = Tweet(twitterUsername: "ItIsFinished", imageURL: url.string!, twitterUserImageURL: url.string!)
-                    array.append(tweet)
-                }
-
-
-                self.tweets = array
-            }
-            
-            }, failure: failureHandler)
-
-
-    }
-
-    func getTweetsFromHashtag() {
-        swifter?.getSearchTweetsWithQuery("#ItIsFinishedApp", geocode: nil, lang: "und", locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
-
-            print(statuses?.count)
-            var array: Array<Tweet> = []
-
-            for status in statuses! {
-                let user = status["user"]
-                let username = user["name"].string
-                let userImage = user["profile_image_url"].string
-                let entities = status["entities"]
-                let media = entities["media"]
-                let mediaArray = media[0]
-                var url = mediaArray["media_url"].string
-                if url == nil {
-                    url = ""
-                }
-                print(url)
-                let tweet = Tweet(twitterUsername: username!, imageURL: url!, twitterUserImageURL: userImage!)
-                array.append(tweet)
-            }
-            self.tweets = array
-
-
-            }, failure: { (error) in
-                print(error)
-        })
+        eyeButton.addTarget(self, action: .buttonTapped, forControlEvents: .TouchUpInside)
+        eyeButton.tag = 0
+        buttonOne?.addTarget(self, action: .buttonTapped, forControlEvents: .TouchUpInside)
+        buttonOne?.tag = 1
+        buttonTwo?.addTarget(self, action: .buttonTapped, forControlEvents: .TouchUpInside)
+        buttonTwo?.tag = 2
+        characterLabel.text = "\(limitLength)"
 
     }
 
@@ -200,17 +112,17 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
                 }, completion: nil)
 
 
-                    let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
-                    spring.toValue = 100
+                let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
+                spring.toValue = 100
                 spring.toValue = 130
 
                 if DeviceType.IS_IPHONE_5 {
                     spring.toValue = 115
                 }
-                    spring.springBounciness = 20
-                    spring.springSpeed = 2
-                    spring.beginTime = (CACurrentMediaTime() + 1)
-                    self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
+                spring.springBounciness = 20
+                spring.springSpeed = 2
+                spring.beginTime = (CACurrentMediaTime() + 1)
+                self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
                 
                 UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
                     self.lineView.alpha = 1
@@ -252,7 +164,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             fanOut()
             eyeButton.alpha = 0.4
         }
-        areButtonsFanned = !areButtonsFanned!
+        areButtonsFanned = !areButtonsFanned
     }
 
     func fanIn() {
@@ -282,8 +194,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             self.buttonOne?.alpha = 1
             self.buttonTwo?.alpha = 1
         }
-        var point = CGPoint()
 
+        var point = CGPoint()
         var snapBehavior: UISnapBehavior
 
         point = CGPointMake(eyeButton.frame.origin.x - 75, eyeButton.frame.origin.y + 20)
@@ -304,15 +216,15 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
 
-
-
             sender.animateTouchUpInside {
                 print("touched")
-                self.animateSavedLibView()
-
+                self.animationImageView.animate()
                 self.resignFirstResponder()
+
                 self.finishedQuoteView.hidden = false
                 self.finishedQuoteView.alpha = 1
+                self.finishedQuoteView.quote = self.quoteOfDayLabel.text!
+                self.finishedQuoteView.enteredText = self.textField.text!
 
                 let sentinelBook = UIFont(name: "Sentinel-Book", size: 17)
                 let sentinelDict = NSDictionary(object: sentinelBook!, forKey: NSFontAttributeName)
@@ -381,60 +293,36 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         quoteSelected = true
         headingLabel.alpha = 0
         textField.text = ""
+        characterLabel.text = "\(limitLength)"
 
         if quoteSelected == true {
             UIView.animateWithDuration(1.0, animations: {
                 self.quoteOfDayLabel.alpha = 1
                 self.quoteOfDayLabel.text = self.selectedQuote
             })
-
-            let spring = POPSpringAnimation(propertyNamed: kPOPLayoutConstraintConstant)
-            spring.toValue = 100
-            spring.springBounciness = 20
-            spring.springSpeed = 2
-            spring.beginTime = (CACurrentMediaTime() + 1)
-            self.quoteLabelTopConstraint.pop_addAnimation(spring, forKey: "moveDown")
-
-            UIView.animateWithDuration(1, delay: 2, options: .CurveEaseInOut, animations: {
-                self.lineView.alpha = 1
-                self.textField.alpha = 1
-                self.finishedButton.alpha = 1
-                }, completion: nil)
-            }
+        }
     }
 
-    func animateSavedLibView() {
-        print("animating view now")
-        animationImageView.hidden = false
 
-        if let soundURL = NSBundle.mainBundle().URLForResource("thunder", withExtension: "mp3") {
-            var mySound: SystemSoundID = 0
-            AudioServicesCreateSystemSoundID(soundURL, &mySound)
-            // Play
-            AudioServicesPlaySystemSound(mySound);
-        }
-
-
-        animationImageView.alpha = 1
-        var imagesArray = [UIImage]()
-        for name in ["savedLibAnimation_0.png", "savedLibAnimation_1.png", "savedLibAnimation_2.png", "savedLibAnimation_3.png", "savedLibAnimation_4.png", "savedLibAnimation_5.png", "savedLibAnimation_6.png", "savedLibAnimation_7.png", "savedLibAnimation_8.png", "csavedLibAnimation_9.png","savedLibAnimation_10.png", "savedLibAnimation_11.png", "savedLibAnimation_12.png", "savedLibAnimation_13.png", "savedLibAnimation_14.png", "savedLibAnimation_15.png", "savedLibAnimation_16.png", "savedLibAnimation_17.png", "savedLibAnimation_18.png", "savedLibAnimation_19.png", "csavedLibAnimation_20.png", "savedLibAnimation_21.png", "savedLibAnimation_22.png", "savedLibAnimation_23.png", "savedLibAnimation_24.png", "savedLibAnimation_25.png", "savedLibAnimation_26.png", "savedLibAnimation_27.png", "savedLibAnimation_28.png", "savedLibAnimation_29.png"] {
-            if let image = UIImage(named: name) {
-                imagesArray.append(image)
-            }
-        }
-
-        animationImageView.animationImages = imagesArray
-        animationImageView.animationDuration = 0.8
-        animationImageView.animationRepeatCount = 1
-        animationImageView.startAnimating()
-
-
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength = text.characters.count + string.characters.count - range.length
+        let length = limitLength - newLength
+        characterLabel.text = "\(length)"
+        return newLength <= limitLength
     }
 
     func textFieldDidBeginEditing(textField: UITextField) {
         UIView.animateWithDuration(0.3) { 
             self.finishedButton.alpha = 0
+            self.characterLabel.alpha = 1
         }
+    }
+
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        print("cleared")
+        characterLabel.text = "\(limitLength)"
+        return true
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -445,11 +333,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         return false
     }
 
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -464,6 +347,17 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     func showButton() {
         UIView.animateWithDuration(0.4) {
             self.finishedButton.alpha = 1
+            self.characterLabel.alpha = 0
+        }
+    }
+
+    func buttonTapped(sender: UIButton) {
+        if sender.tag == 0 {
+            fanButtons()
+        } else if sender.tag == 1 {
+            showQuotes()
+        } else if sender.tag == 2 {
+            showTweets()
         }
     }
 
@@ -471,6 +365,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         print("show quotes")
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let quotes = mainStoryboard.instantiateViewControllerWithIdentifier("ListVC") as! ListViewController
+        quotes.delegate = self
         self.presentViewController(quotes, animated: true, completion: nil)
     }
 
@@ -478,10 +373,21 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         print("show tweets")
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let tweetVC = mainStoryboard.instantiateViewControllerWithIdentifier("TweetVC") as! TweetsViewController
-        tweetVC.tweets = self.tweets
+        //tweetVC.tweets = self.tweets
         self.presentViewController(tweetVC, animated: true, completion: nil)
 
     }
+
+    func selectedQuoteOfDay() {
+        let quoteRequest = DataService.dataService.getQuote()
+        let quote = Quote(quoteText: quoteRequest)
+        quoteOfDayLabel.text = quote.quoteText
+        headingLabel.alpha = 1
+
+
+    }
+
+
 
 
 

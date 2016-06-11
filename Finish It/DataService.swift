@@ -7,10 +7,17 @@
 //
 
 import Foundation
+import SwifteriOS
 
 class DataService {
     static let dataService = DataService()
+    var swifter: Swifter?
 
+    var tweets:[Tweet] = [] {
+        didSet {
+            NSNotificationCenter.defaultCenter().postNotificationName("tweetsFetched", object: nil)
+        }
+    }
 
     func getQuote() -> String {
 
@@ -75,6 +82,65 @@ class DataService {
         return quoteArray
 
     }
+
+    func getTweetsWithHashtag(hashtag: String) {
+        swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
+        swifter!.authorizeAppOnlyWithSuccess({ (accessToken, response) -> Void in
+            print("success - access token is \(accessToken)")
+            //self.getTweetsFromHashtag(hashtag)
+//            self.swifter!.getUsersShowWithScreenName("ItIsFinishedApp", includeEntities: true, success: { (user) in
+//                if let userDict = user {
+//                    if let userId = userDict["id_str"] {
+//                        //self.getTwitterStatusWithUserId(userId.string!)
+//                        self.getTweetsFromHashtag()
+//                    }
+//                }
+//                }, failure: { (error) in
+//                    print(error)
+//            })
+            }, failure: { (error) -> Void in
+                print("Error Authenticating: \(error.localizedDescription)")
+        })
+
+    }
+
+//    func getTweetsFromHashtag(hashtag: String) {
+//        swifter?.getSearchTweetsWithQuery(hashtag, geocode: nil, lang: "und", locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
+//
+//            print(statuses?.count)
+//            var array = [Tweet]()
+//
+//            for status in statuses! {
+//                let user = status["user"]
+//                let username = user["name"].string
+//                let screenName = user["screen_name"].string
+//                let userImage = user["profile_image_url"].string
+//                let creationTime = status["created_at"].string
+//                let dateFormatter = NSDateFormatter()
+//                dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+//                dateFormatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
+//                let date = dateFormatter.dateFromString(creationTime!)
+//                let testDate = date?.getElapsedInterval()
+//                print(testDate)
+//
+//                let entities = status["entities"]
+//                let media = entities["media"]
+//                let mediaArray = media[0]
+//                var url = mediaArray["media_url"].string
+//                if url == nil {
+//                    url = ""
+//                }
+//                print(url)
+//                let tweet = Tweet(twitterUsername: username!, imageURL: url!, twitterUserImageURL: userImage!, screenName: screenName!, time: testDate!)
+//                array.append(tweet)
+//            }
+//            self.tweets = array
+//
+//            }, failure: { (error) in
+//                print(error)
+//        })
+//    }
+
 
 
 

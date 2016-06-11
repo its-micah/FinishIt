@@ -17,6 +17,8 @@ class FinishedQuoteView: UIView {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var quoteLabel: UILabel!
     var delegate : FinishedQuoteViewProtocol?
+    var quote: String? = nil
+    var enteredText: String? = nil
 
     /*
     // Only override drawRect: if you perform custom drawing.
@@ -32,44 +34,62 @@ class FinishedQuoteView: UIView {
     
     @IBAction func onShareButtonTapped(sender: UIButton) {
         print("share")
-//        UIGraphicsBeginImageContext(CGSizeMake(500, 500))
         UIGraphicsBeginImageContextWithOptions(CGSize(width: 500, height: 500), false, 0)
         let context: CGContextRef = UIGraphicsGetCurrentContext()!
         CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
-        // 2
+
         let paragraphStyle = NSMutableParagraphStyle()
+        let fontsize: CGFloat = 33
+
+        let sentinelBook = UIFont(name: "Sentinel-Book", size: fontsize)
+        let sentinelDict = NSDictionary(object: sentinelBook!, forKey: NSFontAttributeName)
+        let aAttrString = NSMutableAttributedString(string: quote!, attributes: sentinelDict as? [String : AnyObject])
+
+        let sentinelSemiBold = UIFont(name: "Sentinel-SemiBold", size: fontsize)
+        let sentinelDict2 = NSDictionary(object: sentinelSemiBold!, forKey: NSFontAttributeName)
+        let bAttrString = NSMutableAttributedString(string: " \(enteredText!)", attributes: sentinelDict2 as? [String : AnyObject])
+
+        aAttrString.appendAttributedString(bAttrString)
+
         paragraphStyle.alignment = .Left
 
-        // 3
-//        let attrs = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 36)!, NSParagraphStyleAttributeName: paragraphStyle]
+        let string = aAttrString
+        let frame = CGRect(x: 0, y: 0, width: 450, height: 10)
+        let label = UILabel(frame: frame)
+        label.numberOfLines = 0
+        label.attributedText = string
+        label.sizeToFit()
 
-        // 4
-        let string = self.quoteLabel.attributedText
 
-        string?.drawWithRect(CGRect(x: 32, y: 32, width: 448, height: 448), options: .UsesLineFragmentOrigin, context: nil)
+        print(label.frame.height)
 
-        // 5
-        let mouse = UIImage(named: "eye")
-        mouse?.drawAtPoint(CGPoint(x: 300, y: 150))
 
-        // 6
+        string.drawWithRect(CGRect(x: 60, y: 200, width: 350, height: 180), options: .UsesLineFragmentOrigin, context: nil)
+
+        let wizard = UIImage(named: "wizardTransparentSmall")
+        print(wizard?.size)
+
+        wizard?.drawAtPoint(CGPoint(x: 220, y: 75))
+
+
         let img = UIGraphicsGetImageFromCurrentImageContext()
 
         UIGraphicsEndImageContext()
-        
-        // 7
+
         let TwitterText = "#ItIsFinishedApp"
         delegate?.showSharingWithImageAndText(img, text: TwitterText)
 
 
-//        UIGraphicsBeginImageContextWithOptions(self.bounds.size, true, 0.0)
-//        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
-//
-//        let screenShot: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        let TwitterText = "#FinishIt"
-//        delegate?.showSharingWithImageAndText(screenShot, text: TwitterText)
+
 
     }
 
 }
+
+
+//let label = UILabel(frame: CGRectMake(labelX, labelY, 400, 100)) // The last variable, 21, is the label's height.  Change as you see fit.
+// 3
+//        let attrs = [NSFontAttributeName: UIFont(name: "HelveticaNeue-Thin", size: 36)!, NSParagraphStyleAttributeName: paragraphStyle]
+
+//label.attributedText = string
+//self.addSubview(label)

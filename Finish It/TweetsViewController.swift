@@ -9,43 +9,111 @@
 import UIKit
 import SwifteriOS
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var tweetsTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    @IBOutlet weak var bar: UINavigationBar!
+    @IBOutlet weak var tweetsCollectionView: UICollectionView!
+
     var tweets: Array<Tweet>?
+    var swifter: Swifter?
+    var refreshControl: UIRefreshControl?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tweetsTableView.delegate = self
-        tweetsTableView.registerNib(UINib(nibName: "TweetCell", bundle: nil), forCellReuseIdentifier: "cell")
+        
+        tweetsCollectionView.delegate = self
+
+        bar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "EskapadeFraktur", size: 20.0)!,
+                                                                         NSForegroundColorAttributeName: UIColor.whiteColor()]
+
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(self.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        tweetsCollectionView.addSubview(refreshControl!)
+
+
+        activityIndicator.startAnimating()
+
+        swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
+        swifter!.authorizeAppOnlyWithSuccess({ (accessToken, response) -> Void in
+            print("success - access token is \(accessToken)")
+            self.swifter!.getUsersShowWithScreenName("ItIsFinishedApp", includeEntities: true, success: { (user) in
+                        self.getTweetsFromHashtag()
+
+                }, failure: { (error) in
+                    print(error)
+            })
+            }, failure: { (error) -> Void in
+                print("Error Authenticating: \(error.localizedDescription)")
+        })
+
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func getTweetsFromHashtag() {
+        swifter?.getSearchTweetsWithQuery("#ItIsFinishedApp", geocode: nil, lang: "und", locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
+
+            print(statuses?.count)
+            var array: Array<Tweet> = []
+
+            for status in statuses! {
+                let tweet = Tweet.init(status: status)
+
+                if let completeTweet = tweet {
+                    array.append(completeTweet)
+                }
+            }
+            self.tweets = array
+            self.tweetsCollectionView.reloadData()
+            self.activityIndicator.stopAnimating()
+            self.refreshControl?.endRefreshing()
+
+            }, failure: { (error) in
+                print(error)
+        })
+        
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake(tweetsCollectionView.frame.size.width/1.05, tweetsCollectionView.frame.size.height/1.8)
     }
 
 
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tweets?.count)!
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let arr = tweets {
+            return arr.count
+        }
+        return 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! TweetTableViewCell
+
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = tweetsCollectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TweetCollectionViewCell
         let tweet = tweets![indexPath.row]
         cell.configureWithTweet(tweet)
         cell.layoutIfNeeded()
         return cell
+
     }
+
 
 
     @IBAction func onCloseButtopTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
+    func refresh() {
+        
+        getTweetsFromHashtag()
+    }
+
+//    override func prefersStatusBarHidden() -> Bool {
+//        return true
+//    }
+
 
     /*
     // MARK: - Navigation
