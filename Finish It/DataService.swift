@@ -37,8 +37,7 @@ class DataService {
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
-        quote = quotes[components.day] as? String
-
+        quote = quotes[components.day % quotes.count] as? String
         return quote!
     }
 
