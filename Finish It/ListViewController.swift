@@ -24,11 +24,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let nib = UINib(nibName: "ListHeaderView", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "ListHeaderView")
         tableView.delegate = self
-        tableView.sectionHeaderHeight = 70
+        self.tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
 
-        bar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "EskapadeFraktur", size: 20.0)!,
-                                    NSForegroundColorAttributeName: UIColor.whiteColor()]
-
+        
         self.quotes = DataService.dataService.getQuoteList()
         quoteOfDay = DataService.dataService.getQuote()
         self.tableView.reloadData()
@@ -38,7 +36,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let quote = quotes[indexPath.row]
-        cell.textLabel?.text = quote.quoteText
+        cell.textLabel?.text = quote.quoteText + "..."
+        cell.textLabel?.numberOfLines = 0
         cell.textLabel?.font = UIFont(name: "Sentinel", size: 18)
         return cell
     }
@@ -54,15 +53,18 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         header.quoteLabel.text = quoteOfDay
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListViewController.handleTap))
         cell?.addGestureRecognizer(tapRecognizer)
-
-
-        return cell
+        tableView.tableHeaderView = header
+        return cell?.contentView
     }
 
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        let selectedQuote = quotes[indexPath.row] as Quote
-//
-//    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.005
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //sizeHeaderToFit()
+    }
 
     func handleTap() {
         self.delegate?.selectedQuoteOfDay()
@@ -81,7 +83,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let selectedPath = tableView.indexPathForCell(sender as! UITableViewCell)
         let selectedQuote = quotes[selectedPath!.row] as Quote
         let vc = segue.destinationViewController as! HomeViewController
-        vc.selectedQuote = selectedQuote.quoteText
+        vc.currentQuote = selectedQuote.quoteText
     }
 
 }

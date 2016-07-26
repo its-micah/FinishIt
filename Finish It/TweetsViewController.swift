@@ -9,11 +9,22 @@
 import UIKit
 import SwifteriOS
 
+extension CAGradientLayer {
+    class func gradientLayerForBounds(bounds: CGRect) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = bounds
+        layer.colors = [UIColor.blackColor().CGColor, UIColor.clearColor().CGColor]
+        return layer
+    }
+}
+
+
+
 class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    @IBOutlet weak var bar: UINavigationBar!
+    @IBOutlet weak var bar: GradientNavBar!
     @IBOutlet weak var tweetsCollectionView: UICollectionView!
 
     var tweets: Array<Tweet>?
@@ -26,12 +37,12 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         tweetsCollectionView.delegate = self
 
-        bar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "EskapadeFraktur", size: 20.0)!,
-                                                                         NSForegroundColorAttributeName: UIColor.whiteColor()]
-
         refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.whiteColor()
         refreshControl!.addTarget(self, action: #selector(self.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tweetsCollectionView.addSubview(refreshControl!)
+
+        
 
 
         activityIndicator.startAnimating()
@@ -54,7 +65,7 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
 
     func getTweetsFromHashtag() {
-        swifter?.getSearchTweetsWithQuery("#ItIsFinishedApp", geocode: nil, lang: "und", locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
+        swifter?.getSearchTweetsWithQuery("#ItIsFinishedApp", geocode: nil, lang: "und", locale: nil, resultType: nil, count: 20, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
 
             print(statuses?.count)
             var array: Array<Tweet> = []
@@ -78,7 +89,11 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(tweetsCollectionView.frame.size.width/1.05, tweetsCollectionView.frame.size.height/1.8)
+        return CGSizeMake(tweetsCollectionView.frame.size.width, tweetsCollectionView.frame.size.height/2.1)
+    }
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 1.0
     }
 
 
@@ -110,9 +125,22 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
         getTweetsFromHashtag()
     }
 
-//    override func prefersStatusBarHidden() -> Bool {
-//        return true
-//    }
+    private func imageLayerForGradientBackground() -> UIImage {
+
+        var updatedFrame = self.bar.bounds
+        // take into account the status bar
+        updatedFrame.size.height += 20
+        let layer = CAGradientLayer.gradientLayerForBounds(updatedFrame)
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 
 
     /*
