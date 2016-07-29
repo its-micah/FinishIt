@@ -6,6 +6,7 @@ use_frameworks!
 target 'Finish It' do
 pod 'Kingfisher', '~> 2.4'
 pod 'pop', '~> 1.0'
+pod 'CircleMenu', '~> 1.0.0'
 
 end
 

@@ -42,9 +42,6 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
         refreshControl!.addTarget(self, action: #selector(self.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tweetsCollectionView.addSubview(refreshControl!)
 
-        
-
-
         activityIndicator.startAnimating()
 
         swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
