@@ -10,6 +10,7 @@ import UIKit
 import pop
 import AVFoundation
 import SwifteriOS
+import CircleMenu
 
 
 private extension Selector {
@@ -18,7 +19,7 @@ private extension Selector {
 }
 
 
-class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable {
+class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable, CircleMenuDelegate {
 
     @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
@@ -48,7 +49,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     @IBOutlet weak var eyeButton: UIButton!
     @IBOutlet weak var animationImageView: AnimationImageView!
     @IBOutlet weak var quoteLabelTopConstraint: NSLayoutConstraint!
-    let limitLength = 45
+    let limitLength = 40
 
 
     override func viewDidLoad() {
@@ -82,6 +83,19 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         buttonOne?.hidden = true
         buttonTwo?.hidden = true
         shareButton.hidden = true
+
+//        let menu = CircleMenu(
+//            frame: CGRect(x: eyeButton.frame.origin.x, y: eyeButton.frame.origin.y, width: eyeButton.frame.width, height: eyeButton.frame.height),
+//            normalIcon:"whiteEyeball",
+//            selectedIcon:"close",
+//            buttonsCount: 2,
+//            duration: 0.5,
+//            distance: 120)
+//        menu.delegate = self
+//        menu.layer.cornerRadius = menu.frame.size.width / 2.0
+//        view.addSubview(menu)
+
+
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         eyeButton.addTarget(self, action: .buttonTapped, forControlEvents: .TouchUpInside)
         eyeButton.tag = 0
@@ -91,7 +105,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         buttonTwo?.tag = 2
         characterLabel.text = "\(limitLength)"
 
-        addStuff()
+        loadTextView()
 
     
     }
@@ -182,8 +196,9 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
             sender.animateTouchUpInside {
                 print("touched")
-                self.animationImageView.animate()
+                self.animationImageView.animateWithNameAndFrames("savedLibAnimation", frames: 47)
                 self.eyeButton.alpha = 0
+                self.textView.hidden = true
                 self.finishedButton.alpha = 0
                 if self.areButtonsFanned == true {
                     self.fanButtons()
@@ -193,8 +208,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
                 let quoteText = self.buildQuoteWithFontSize(18)
 
                 self.finishedQuoteView.configure(quoteText)
-
-
 
             }
         }
@@ -220,6 +233,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
     
     func dismiss() {
+        print("dismiss")
+        textView.hidden = false
         let spring = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
         spring.toValue = NSValue(CGSize: CGSizeMake( 0.5, 0.5))
         spring.springBounciness = 10
@@ -237,7 +252,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         UIView.animateWithDuration(0.3) {
             self.finishedButton.alpha = 1
             self.eyeButton.alpha = 1
-
             self.shareButton.alpha = 0
         }
 
@@ -386,8 +400,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         }
     }
 
-    func isAcceptableTextLength(length: Int) -> Bool {
-        return length <= limitLength
+    func isAcceptableTextLength(range: NSRange) -> Bool {
+        return (currentQuote?.characters.count)! + limitLength > range.location
     }
 
 
@@ -403,11 +417,12 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
         let newLength = text2.characters.count
         let length = limitLength - newLength
-        characterLabel.text = "\(length)"
-        print(length)
+        //characterLabel.text = "\(length)"
+        //print("length is \(length)")
+        print(currentQuote?.characters.count)
         if let quoteLength = currentQuote?.characters.count {
 
-            if isAcceptableTextLength(textView.text.characters.count - quoteLength) {
+            if isAcceptableTextLength(range) {
 
                 if range.location >= quoteLength {
                     let attrString = NSMutableAttributedString(string: textView.text)
@@ -422,11 +437,10 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
                 }
             }
+
         }
 
         return false
-
-
 
     }
 
@@ -438,29 +452,27 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
         sender.animateTouchUpInside { 
             print("share")
-            UIGraphicsBeginImageContextWithOptions(CGSize(width: 500, height: 281), false, 0)
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: 500, height: 280), false, 0)
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
             CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
 
             let quoteText = self.buildQuoteWithFontSize(33)
 
-            let frame = CGRect(x: 0, y: 0, width: 450, height: 10)
+            let frame = CGRect(x: 0, y: 0, width: 500, height: 10)
             let label = UILabel(frame: frame)
             label.numberOfLines = 0
             label.attributedText = quoteText
             label.sizeToFit()
 
+            print("height is \(label.frame.height)")
+            let yPoint = CGFloat((280 - label.frame.height)/2)
 
-            print(label.frame.height)
-
-
-            quoteText.drawWithRect(CGRect(x: 60, y: 95, width: 350, height: 180), options: .UsesLineFragmentOrigin, context: nil)
+            quoteText.drawWithRect(CGRect(x: 60, y: yPoint, width: 350, height: 180), options: .UsesLineFragmentOrigin, context: nil)
 
             let wizard = UIImage(named: "wizardTransparentSmall")
             print(wizard?.size)
 
             wizard?.drawAtPoint(CGPoint(x: 430, y: 210))
-            
             
             let img = UIGraphicsGetImageFromCurrentImageContext()
             
@@ -500,11 +512,15 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
     func finishedAnimation() {
-        self.shareButton.alpha = 0
-        self.finishedQuoteView.hidden = false
-        self.shareButton.hidden = false
-        self.finishedQuoteView.alpha = 1
-        self.blurView.animate()
+        let frame = self.view.frame
+        let sparkleView = AnimationImageView(frame: frame)
+        self.view.addSubview(sparkleView)
+        animationImageView.animateSparkles("Sparkles", frames: 22)
+        shareButton.alpha = 0
+        finishedQuoteView.hidden = false
+        shareButton.hidden = false
+        finishedQuoteView.alpha = 1
+        blurView.animate()
 
         self.eyeButton.enabled = false
         UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseInOut, animations: {
@@ -520,13 +536,13 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             })
 
 
-
             }, completion: nil)
 
 
     }
 
-    func addStuff() {
+    func loadTextView() {
+        self.textView.hidden = false
         if quoteSelected == false || quoteSelected == nil {
 
             let fontsize: CGFloat = 33
@@ -551,13 +567,16 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             })
 
 
-            UIView.animateWithDuration(1, delay: 1, options: .CurveEaseInOut, animations: {
+            UIView.animateWithDuration(1, delay: 0.7, options: .CurveEaseInOut, animations: {
                 self.finishedButton.alpha = 1
             }, completion: nil)
             
         }
 
     }
+
+
+
 
 
 
