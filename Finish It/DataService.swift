@@ -32,7 +32,7 @@ class DataService {
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
         formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("05/31/16")
+        let startDate = formatter.dateFromString("07/06/16")
         let cal = NSCalendar.currentCalendar()
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
@@ -65,11 +65,11 @@ class DataService {
         var counter:Int = 0
 
         if index > quotes.count {
-            index = 15
+            index = 40
         }
 
         for q in quotes {
-            if counter > index - 15 && counter < index {
+            if counter > index - 40 && counter < index {
                 let quote = Quote(quoteText: q as! String)
                 quoteArray.append(quote)
             }
