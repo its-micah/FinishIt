@@ -10,16 +10,17 @@ import UIKit
 import pop
 import AVFoundation
 import SwifteriOS
-import CircleMenu
+import BubbleTransition
 
 
 private extension Selector {
     static let buttonTapped =
         #selector(HomeViewController.buttonTapped(_:))
+    static let keyboardWillShow = #selector(HomeViewController.keyboardWillShow(_:))
 }
 
 
-class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable, CircleMenuDelegate {
+class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable, UIViewControllerTransitioningDelegate {
 
     @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
@@ -29,6 +30,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     private let consumerKey = "dIS3vBfYpu5a87L6zSLV0ab3f"
     private let consumerSecret = "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939"
     private let baseUrlString = "https://api.twitter.com/1.1/"
+    let transition = BubbleTransition()
     var quote = Quote(quoteText:"")
     var currentQuote: String?
     var quoteSelected: Bool?
@@ -56,6 +58,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         super.viewDidLoad()
 
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: .keyboardWillShow, name: UIKeyboardWillShowNotification, object: nil)
+
         // Do any additional setup after loading the view, typically from a nib.
         self.hideKeyboardWhenTappedAround()
         buttonOne = createButtonWithName("Quotes")
@@ -84,16 +88,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         buttonTwo?.hidden = true
         shareButton.hidden = true
 
-//        let menu = CircleMenu(
-//            frame: CGRect(x: eyeButton.frame.origin.x, y: eyeButton.frame.origin.y, width: eyeButton.frame.width, height: eyeButton.frame.height),
-//            normalIcon:"whiteEyeball",
-//            selectedIcon:"close",
-//            buttonsCount: 2,
-//            duration: 0.5,
-//            distance: 120)
-//        menu.delegate = self
-//        menu.layer.cornerRadius = menu.frame.size.width / 2.0
-//        view.addSubview(menu)
+        eyeButton.setImage(UIImage(named: "whiteEyeball"), forState: .Normal)
+        eyeButton.setImage(UIImage(named: "close"), forState: .Selected)
 
 
         UIApplication.sharedApplication().statusBarStyle = .LightContent
@@ -129,6 +125,12 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
     func fanButtons() {
+        
+        if eyeButton.selected {
+            eyeButton.selected = false
+        } else {
+            eyeButton.selected = true
+        }
         print("fan buttons")
         audioPlayer.play()
 
@@ -279,6 +281,8 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
 
+    /* Textfield Delegate Methods */
+
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
@@ -306,6 +310,46 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         }
         return false
     }
+
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+
+        guard let text2 = textView.text else { return true }
+
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+
+
+        let newLength = text2.characters.count
+        let length = limitLength - newLength
+        characterLabel.text = "\(length)"
+        //print("length is \(length)")
+        print(currentQuote?.characters.count)
+        if let quoteLength = currentQuote?.characters.count {
+
+            if isAcceptableTextLength(range) {
+
+                if range.location >= quoteLength {
+                    let attrString = NSMutableAttributedString(string: textView.text)
+                    let sentinelSemiBold = UIFont(name: "Sentinel-SemiBold", size: 33)
+
+                    attrString.addAttribute(NSFontAttributeName, value: sentinelSemiBold!, range: NSRange(location: 0, length: textView.text.characters.count))
+                    attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSRange(location:quoteLength,length:textView.text.characters.count - quoteLength))
+
+                    textView.attributedText = attrString
+
+                    return true
+                    
+                }
+            }
+            
+        }
+        
+        return false
+        
+    }
+
 
     func addFinishItText() -> NSMutableAttributedString {
         let fontsize: CGFloat = 33
@@ -335,12 +379,16 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
     func buttonTapped(sender: UIButton) {
+
+
         if sender.tag == 0 {
             fanButtons()
         } else if sender.tag == 1 {
+            buttonOne?.selected = true
             showQuotes()
         } else if sender.tag == 2 {
             showTweets()
+            buttonOne?.selected = true
         }
     }
 
@@ -349,14 +397,19 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let quotes = mainStoryboard.instantiateViewControllerWithIdentifier("ListVC") as! ListViewController
         quotes.delegate = self
-        self.presentViewController(quotes, animated: true, completion: nil)
+        fanButtons()
+        self.performSegueWithIdentifier("showList", sender: self)
+//        self.presentViewController(quotes, animated: true, completion: nil)
     }
 
     func showTweets() {
         print("show tweets")
         let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let tweetVC = mainStoryboard.instantiateViewControllerWithIdentifier("TweetVC") as! TweetsViewController
-        self.presentViewController(tweetVC, animated: true, completion: nil)
+        fanButtons()
+        self.performSegueWithIdentifier("showTweets", sender: self)
+
+//        self.presentViewController(tweetVC, animated: true, completion: nil)
 
     }
 
@@ -379,7 +432,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
     func textViewDidBeginEditing(textView: UITextView) {
         self.performSelector(#selector(HomeViewController.moveCursor), withObject: textView, afterDelay: 0.0)
-        //self.characterLabel.alpha = 1
+        self.characterLabel.alpha = 1
     }
 
     func textViewDidEndEditing(textView: UITextView) {
@@ -405,44 +458,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
 
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-
-        guard let text2 = textView.text else { return true }
-
-        if(text == "\n") {
-            textView.resignFirstResponder()
-            return false
-        }
-        
-
-        let newLength = text2.characters.count
-        let length = limitLength - newLength
-        //characterLabel.text = "\(length)"
-        //print("length is \(length)")
-        print(currentQuote?.characters.count)
-        if let quoteLength = currentQuote?.characters.count {
-
-            if isAcceptableTextLength(range) {
-
-                if range.location >= quoteLength {
-                    let attrString = NSMutableAttributedString(string: textView.text)
-                    let sentinelSemiBold = UIFont(name: "Sentinel-SemiBold", size: 33)
-
-                    attrString.addAttribute(NSFontAttributeName, value: sentinelSemiBold!, range: NSRange(location: 0, length: textView.text.characters.count))
-                        attrString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSRange(location:quoteLength,length:textView.text.characters.count - quoteLength))
-
-                    textView.attributedText = attrString
-                    
-                    return true
-
-                }
-            }
-
-        }
-
-        return false
-
-    }
 
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -573,6 +588,43 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             
         }
 
+    }
+
+    func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        let keyboardHeight = keyboardRectangle.height
+        print(keyboardHeight)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let controller = segue.destinationViewController
+        controller.transitioningDelegate = self
+        controller.modalPresentationStyle = .Custom
+    }
+
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .Present
+        if buttonOne?.selected == true {
+            transition.startingPoint = buttonOne!.center
+        } else {
+            transition.startingPoint = buttonTwo!.center
+        }
+
+        transition.duration = 0.4
+//        transition.bubbleColor = UIColor.clearColor()
+        return transition
+    }
+
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .Dismiss
+        transition.startingPoint = eyeButton.center
+        UIView.animateWithDuration(0.3) {
+            dismissed.view.alpha = 0
+        }
+//        transition.bubbleColor = UIColor.clearColor()
+        return transition
     }
 
 
