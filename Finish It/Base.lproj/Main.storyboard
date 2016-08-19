@@ -15,7 +15,6 @@
         </mutableArray>
         <mutableArray key="Sentinel-Medium.otf">
             <string>Sentinel-Medium</string>
-            <string>Sentinel-Medium</string>
         </mutableArray>
         <mutableArray key="Sentinel-Semibold.otf">
             <string>Sentinel-Semibold</string>
@@ -38,7 +37,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="CJy-Uy-R0U">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="CJy-Uy-R0U">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.3294117647" green="0.3921568627" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -46,9 +45,10 @@
                                         <rect key="frame" x="0.0" y="1" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z5H-uc-xa8" id="hvd-Re-m3L">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.29417494090000001" green="0.35573834599999998" blue="0.68597402910000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="lZq-MT-Jq0" kind="unwind" unwindAction="loadSelectedQuote:" id="Qh5-Cn-NVC"/>
                                         </connections>
@@ -78,7 +78,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vTG-E6-x7s">
-                                <rect key="frame" x="286" y="18" width="18" height="22"/>
+                                <rect key="frame" x="258" y="18" width="46" height="40"/>
                                 <state key="normal" image="close"/>
                                 <connections>
                                     <action selector="onCloseButtonTapped:" destination="O61-HQ-FpB" eventType="touchUpInside" id="Zaa-fx-sC2"/>
@@ -159,19 +159,19 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVY-pC-EkN">
-                                                    <rect key="frame" x="263.5" y="17" width="12.5" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVY-pC-EkN">
+                                                    <rect key="frame" x="263" y="17" width="12.5" height="14"/>
                                                     <fontDescription key="fontDescription" name="Sentinel-Book" family="Sentinel" pointSize="12"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28G-sf-VF4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28G-sf-VF4">
                                                     <rect key="frame" x="78" y="15" width="39" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="Sentinel-Medium" family="Sentinel" pointSize="16"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtu-1F-f2o">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="handle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtu-1F-f2o">
                                                     <rect key="frame" x="78" y="37" width="41" height="17"/>
                                                     <fontDescription key="fontDescription" name="Sentinel-Book" family="Sentinel" pointSize="14"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -237,7 +237,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHR-fg-Ll0">
-                                <rect key="frame" x="286" y="18" width="18" height="22"/>
+                                <rect key="frame" x="258" y="18" width="46" height="40"/>
                                 <state key="normal" image="close"/>
                                 <connections>
                                     <action selector="onCloseButtopTapped:" destination="g7K-kb-34q" eventType="touchUpInside" id="OBd-ec-CcV"/>
@@ -320,9 +320,13 @@
                                 <fontDescription key="fontDescription" name="Sentinel-Semibold" family="Sentinel" pointSize="42"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3N-sn-2Q3">
-                                <rect key="frame" x="152" y="276" width="15.5" height="17"/>
-                                <fontDescription key="fontDescription" name="Sentinel-Medium" family="Sentinel" pointSize="14"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6EZ-iG-ztq">
+                                <rect key="frame" x="279" y="321" width="21" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9N5-9A-vou"/>
+                                    <constraint firstAttribute="width" constant="21" id="z6H-pU-aPI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -391,13 +395,13 @@
                         <color key="backgroundColor" red="0.32941176470588235" green="0.39215686274509803" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="4tR-n5-55O" firstAttribute="top" secondItem="SQJ-R1-ECD" secondAttribute="bottom" id="0JN-6U-OZy"/>
-                            <constraint firstItem="N3N-sn-2Q3" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="3pA-mf-Ay9"/>
                             <constraint firstItem="awi-ZN-8Pq" firstAttribute="top" secondItem="neY-qT-q1F" secondAttribute="bottom" constant="46" id="5gk-Io-6tR"/>
                             <constraint firstItem="SQJ-R1-ECD" firstAttribute="top" secondItem="AJu-fv-qFo" secondAttribute="bottom" id="7Zf-4T-gi1"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="width" secondItem="ssI-Kb-Fl1" secondAttribute="width" multiplier="0.7" id="8fs-Uo-xqx"/>
                             <constraint firstItem="W5S-S3-TP2" firstAttribute="centerY" secondItem="ssI-Kb-Fl1" secondAttribute="centerY" constant="-50" id="9RH-WJ-psr"/>
                             <constraint firstItem="awi-ZN-8Pq" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="9ko-So-Hef"/>
                             <constraint firstItem="eOg-xm-b53" firstAttribute="top" secondItem="ssI-Kb-Fl1" secondAttribute="topMargin" id="Bj5-PC-mcb"/>
+                            <constraint firstItem="4tR-n5-55O" firstAttribute="top" secondItem="6EZ-iG-ztq" secondAttribute="bottom" constant="226" id="HUe-Oh-oso"/>
                             <constraint firstAttribute="trailing" secondItem="SQJ-R1-ECD" secondAttribute="trailing" id="I6B-vY-qDD"/>
                             <constraint firstItem="KtM-om-5lq" firstAttribute="leading" secondItem="ssI-Kb-Fl1" secondAttribute="leadingMargin" id="KO2-wJ-eht"/>
                             <constraint firstItem="4y4-pV-5QN" firstAttribute="width" secondItem="ssI-Kb-Fl1" secondAttribute="width" multiplier="0.65" id="KhV-4T-rnS"/>
@@ -413,7 +417,7 @@
                             <constraint firstItem="neY-qT-q1F" firstAttribute="centerX" secondItem="ssI-Kb-Fl1" secondAttribute="centerX" id="lxP-Kf-l1p"/>
                             <constraint firstAttribute="trailing" secondItem="eOg-xm-b53" secondAttribute="trailing" id="o89-Zq-FsE"/>
                             <constraint firstItem="4tR-n5-55O" firstAttribute="top" secondItem="awi-ZN-8Pq" secondAttribute="bottom" constant="48" id="oLZ-C9-QbC"/>
-                            <constraint firstItem="N3N-sn-2Q3" firstAttribute="centerY" secondItem="ssI-Kb-Fl1" secondAttribute="centerY" id="voc-zF-kAx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6EZ-iG-ztq" secondAttribute="trailing" constant="4" id="tNa-il-hL5"/>
                             <constraint firstItem="neY-qT-q1F" firstAttribute="top" secondItem="KtM-om-5lq" secondAttribute="bottom" constant="21" id="xfw-Kq-ykD"/>
                         </constraints>
                     </view>
@@ -421,12 +425,14 @@
                     <connections>
                         <outlet property="animationImageView" destination="SQJ-R1-ECD" id="hoc-55-KPp"/>
                         <outlet property="blurView" destination="eOg-xm-b53" id="rmi-ra-FRx"/>
-                        <outlet property="characterLabel" destination="N3N-sn-2Q3" id="SgB-CE-prj"/>
+                        <outlet property="characterLabel" destination="6EZ-iG-ztq" id="fD7-we-ylP"/>
                         <outlet property="eyeButton" destination="awi-ZN-8Pq" id="F2F-G9-u7L"/>
                         <outlet property="finishedButton" destination="neY-qT-q1F" id="cfj-0k-izP"/>
                         <outlet property="finishedQuoteView" destination="W5S-S3-TP2" id="hyH-Zv-MIg"/>
                         <outlet property="shareButton" destination="4y4-pV-5QN" id="XAO-1z-FpK"/>
                         <outlet property="textView" destination="KtM-om-5lq" id="AVI-tI-ae3"/>
+                        <segue destination="O61-HQ-FpB" kind="modal" identifier="showList" id="upY-Pj-L21"/>
+                        <segue destination="g7K-kb-34q" kind="modal" identifier="showTweets" id="1Uu-xV-i7Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fsg-BO-cj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -441,7 +447,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="18" height="18"/>
+        <image name="close" width="46" height="40"/>
         <image name="whiteEyeball" width="45" height="40"/>
     </resources>
 </document>
