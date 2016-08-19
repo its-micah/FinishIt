@@ -37,7 +37,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
         let quote = quotes[indexPath.row]
         cell.textLabel?.text = quote.quoteText + "..."
-        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.numberOfLines = 1
+        cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel?.font = UIFont(name: "Sentinel", size: 18)
         return cell
     }
