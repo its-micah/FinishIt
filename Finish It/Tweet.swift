@@ -24,7 +24,9 @@ struct Tweet {
             return nil
         }
 
-        guard let username = user["name"]?.string, let screenName = user["screen_name"]?.string, let userImage = user["profile_image_url_https"]?.string else {
+        guard let username = user["name"]?.string,
+            let screenName = user["screen_name"]?.string,
+            let userImageURL = user["profile_image_url_https"]?.string else {
             return nil
         }
 
@@ -41,6 +43,8 @@ struct Tweet {
         dateFormatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
         let date = dateFormatter.dateFromString(creationTime)
         let elapsedTime = date?.getElapsedInterval()
+
+        let userImage = userImageURL.stringByReplacingOccurrencesOfString("_normal", withString: "", options: .CaseInsensitiveSearch, range: nil)
 
 
         self.imageURL = url
