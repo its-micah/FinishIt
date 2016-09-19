@@ -22,11 +22,11 @@ extension CAGradientLayer {
 
 class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var bar: GradientNavBar!
     @IBOutlet weak var tweetsCollectionView: UICollectionView!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var tweets: Array<Tweet>?
     var swifter: Swifter?
     var refreshControl: UIRefreshControl?
@@ -34,6 +34,8 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         tweetsCollectionView.delegate = self
 
@@ -47,6 +49,7 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
         swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
         swifter!.authorizeAppOnlyWithSuccess({ (accessToken, response) -> Void in
             print("success - access token is \(accessToken)")
+
             self.swifter!.getUsersShowWithScreenName("ItIsFinishedApp", includeEntities: true, success: { (user) in
                         self.getTweetsFromHashtag()
 
@@ -61,8 +64,15 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
         // Do any additional setup after loading the view.
     }
 
+
+    override func viewDidAppear(animated: Bool) {
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnTap = true
+
+    }
+
     func getTweetsFromHashtag() {
-        swifter?.getSearchTweetsWithQuery("#ItIsFinishedApp", geocode: nil, lang: "und", locale: nil, resultType: nil, count: 20, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
+        swifter?.getSearchTweetsWithQuery("ItIsFinishedApp", geocode: nil, lang: nil, locale: nil, resultType: nil, count: 20, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
 
             print(statuses?.count)
             var array: Array<Tweet> = []
@@ -77,6 +87,7 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.tweets = array
             self.tweetsCollectionView.reloadData()
             self.activityIndicator.stopAnimating()
+            //self.spinner?.removeFromSuperview()
             self.refreshControl?.endRefreshing()
 
             }, failure: { (error) in

@@ -44,6 +44,11 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     var enteredText: String?
     var clickSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Peak_Button1", ofType: "wav")!)
     var audioPlayer = AVAudioPlayer()
+    var keyboardHeight: CGFloat = 0
+    var imagesArray = [UIImage]()
+    var finishItSuffix = " tap to finish it"
+
+
     @IBOutlet var finishedButton: FinishedButton!
     @IBOutlet weak var finishedQuoteView: FinishedQuoteView!
     @IBOutlet weak var blurView: BlurView!
@@ -63,16 +68,16 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         // Do any additional setup after loading the view, typically from a nib.
         self.hideKeyboardWhenTappedAround()
         buttonOne = createButtonWithName("Quotes")
-        buttonTwo = createButtonWithName("Web")
+        buttonTwo = createButtonWithName("Tweets")
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "EskapadeFraktur", size: 20.0)!,
                                                                          NSForegroundColorAttributeName: UIColor.whiteColor()]
-        do {
-            try  audioPlayer =  AVAudioPlayer(contentsOfURL: clickSound)
-        } catch {
-            print("Player not available")
-        }
 
-        audioPlayer.prepareToPlay()
+        do{
+            audioPlayer = try AVAudioPlayer(contentsOfURL:clickSound)
+            audioPlayer.prepareToPlay()
+        }catch {
+            print("Error getting the audio file")
+        }
 
         characterLabel.alpha = 0
         textView.alpha = 0
@@ -102,8 +107,30 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         characterLabel.text = "\(limitLength)"
 
         loadTextView()
+        createBodyEditor()
+        let frame = self.view.frame
+        let sparkleView = AnimationImageView(frame: frame)
+        self.view.addSubview(sparkleView)
 
-    
+
+        for var i = 0; i <= 48; i += 1 {
+            let imageName = "eyeball_\(i).png"
+            if let image = UIImage(named: imageName) {
+                imagesArray.append(image)
+            }
+        }
+
+
+        eyeButton.imageView?.animationImages = imagesArray
+        eyeButton.setImage(imagesArray[0], forState: .Normal)
+
+        var eyeballAnimateTimer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: #selector(HomeViewController.animateEyeball), userInfo: nil, repeats: true)
+
+
+    }
+
+    override func viewDidAppear(animated: Bool) {
+
     }
 
     func createButtonWithName(name: String) -> UIButton {
@@ -132,7 +159,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             eyeButton.selected = true
         }
         print("fan buttons")
-        audioPlayer.play()
 
         dynamicAnimator?.removeAllBehaviors()
 
@@ -159,11 +185,13 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         UIView.animateWithDuration(0.2) { 
             self.buttonOne?.alpha = 0
             self.buttonTwo?.alpha = 0
+
         }
 
     }
 
     func fanOut() {
+        audioPlayer.play()
         buttonOne?.alpha = 0
         buttonTwo?.alpha = 0
         buttonOne?.hidden = false
@@ -173,6 +201,20 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             self.buttonOne?.alpha = 1
             self.buttonTwo?.alpha = 1
         }
+
+        let rotateTransform = CATransform3DMakeRotation(90, 0, 0, 0)
+
+            UIView.animateWithDuration(
+                0.2,
+                delay: 0,
+                options: UIViewAnimationOptions.CurveEaseInOut,
+                animations: { () -> Void in
+                    self.eyeButton.layer.transform = rotateTransform
+                },
+                completion: nil)
+
+
+
 
         var point = CGPoint()
         var snapBehavior: UISnapBehavior
@@ -185,10 +227,11 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         snapBehavior = UISnapBehavior(item: buttonTwo!, snapToPoint: point)
         dynamicAnimator?.addBehavior(snapBehavior)
 
+
     }
     
     @IBAction func onFinishedButtonTapped(sender: FinishedButton) {
-        if textView.text == currentQuote! || textView.text == currentQuote! + " " || textView.text == currentQuote! + " finish it" || textView.text == currentQuote! + ""{
+        if textView.text == currentQuote! || textView.text == currentQuote! + " " || textView.text == currentQuote! + finishItSuffix || textView.text == currentQuote! + ""{
             moveCursor()
             let alert  = UIAlertController(title: "WOAH NOW", message: "You didn't finish it. Get it together.", preferredStyle: .Alert)
             let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
@@ -216,7 +259,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
     
     func showSharingWithImageAndText(image: UIImage, text: String) {
-        let activityViewController : UIActivityViewController = UIActivityViewController(
+               let activityViewController : UIActivityViewController = UIActivityViewController(
             activityItems: [text, image],
             applicationActivities: nil)
         let presentationController = activityViewController.popoverPresentationController
@@ -270,6 +313,31 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         let finishIt = addFinishItText()
 
         attrText.appendAttributedString(finishIt)
+        let fullString: NSString = currentQuote! + finishItSuffix
+
+        let rangeOfText = (fullString).rangeOfString(finishItSuffix, options: .CaseInsensitiveSearch)
+        let stringForPlayer = attrText.mutableCopy() as! NSMutableAttributedString
+
+        UIView.transitionWithView(textView, duration: 0.75, options: [.Repeat, .AllowUserInteraction], animations: { () -> Void in
+            stringForPlayer.addAttribute(
+                NSForegroundColorAttributeName,
+                value: UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.3),
+                range: rangeOfText)
+            self.textView.attributedText = stringForPlayer
+            }, completion: { (finished) -> Void in
+                UIView.transitionWithView(self.textView, duration: 1.25, options: [.Autoreverse, .CurveEaseInOut, .TransitionCrossDissolve, .Repeat, .AllowUserInteraction], animations: { () -> Void in
+                    stringForPlayer.addAttribute(
+                        NSForegroundColorAttributeName,
+                        value: UIColor.whiteColor(),
+                        range: rangeOfText)
+                    self.textView.attributedText = stringForPlayer
+                    }, completion: nil)
+        })
+
+    
+
+
+
 
         if quoteSelected == true {
             self.textView.attributedText = attrText
@@ -355,8 +423,9 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         let fontsize: CGFloat = 33
         let sentinelSemiBold = UIFont(name: "Sentinel-SemiBold", size: fontsize)
         let sentinelDict = NSDictionary(object: sentinelSemiBold!, forKey: NSFontAttributeName)
-        let finishIt = NSMutableAttributedString(string: " finish it", attributes: sentinelDict as? [String : AnyObject])
-        finishIt.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 166/255, green: 175/255, blue: 228/255, alpha: 1), range: NSRange(location: 0, length: finishIt.length))
+        let finishIt = NSMutableAttributedString(string: finishItSuffix, attributes: sentinelDict as? [String : AnyObject])
+        //finishIt.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 166/255, green: 175/255, blue: 228/255, alpha: 1), range: NSRange(location: 0, length: finishIt.length))
+        finishIt.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.3), range: NSRange(location: 0, length: finishIt.length))
         return finishIt
     }
 
@@ -394,23 +463,20 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
     func showQuotes() {
         print("show quotes")
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let quotes = mainStoryboard.instantiateViewControllerWithIdentifier("ListVC") as! ListViewController
-        quotes.delegate = self
         fanButtons()
         self.performSegueWithIdentifier("showList", sender: self)
-//        self.presentViewController(quotes, animated: true, completion: nil)
     }
 
     func showTweets() {
         print("show tweets")
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let tweetVC = mainStoryboard.instantiateViewControllerWithIdentifier("TweetVC") as! TweetsViewController
         fanButtons()
         self.performSegueWithIdentifier("showTweets", sender: self)
 
-//        self.presentViewController(tweetVC, animated: true, completion: nil)
+    }
 
+    @IBAction func unwindToRed(segue: UIStoryboardSegue) {
+        print("I unwinded")
+        selectedQuoteOfDay()
     }
 
     func selectedQuoteOfDay() {
@@ -440,17 +506,30 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
     func moveCursor() {
+        textView.layer.removeAllAnimations()
         let finishIt = addFinishItText()
-        let length = textView.text.characters.count - finishIt.length
-        textView.selectedRange = NSMakeRange(length, 0)
-        let stringRange = textView.text.rangeOfString(finishIt.string)
-        if textView.text.containsString("finish it") {
-            textView.text.removeRange(stringRange!)
-        }
-        if let newPosition = textView.positionFromPosition(textView.beginningOfDocument, inDirection: UITextLayoutDirection.Right, offset: (currentQuote?.characters.count)!) {
+        let length = (currentQuote?.characters.count)! - finishIt.length
 
-            textView.text = currentQuote! + " "
-        }
+        if textView.text == currentQuote! + finishItSuffix {
+            print("move cursor")
+            textView.selectedRange = NSMakeRange(length, 0)
+            let stringRange = textView.text.rangeOfString(finishIt.string)
+            if textView.text.containsString(finishItSuffix) {
+                textView.text.removeRange(stringRange!)
+            }
+            if let newPosition = textView.positionFromPosition(textView.beginningOfDocument, inDirection: UITextLayoutDirection.Right, offset: (currentQuote?.characters.count)!) {
+
+                textView.text = currentQuote! + " "
+            }
+
+        } else {print("dont move")}
+
+
+//        if (currentQuote?.characters.count)! <= textView.text.characters.count {
+//            print("don't move")
+//        } else {
+//
+//        }
     }
 
     func isAcceptableTextLength(range: NSRange) -> Bool {
@@ -469,26 +548,28 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             print("share")
             UIGraphicsBeginImageContextWithOptions(CGSize(width: 500, height: 280), false, 0)
             let context: CGContextRef = UIGraphicsGetCurrentContext()!
-            CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+            CGContextSetRGBFillColor(context, 48/255, 60/255, 125/255, 1)
+            CGContextFillRect(context, CGRect(x: 0.0, y: 0.0, width: 500, height: 280))
+
 
             let quoteText = self.buildQuoteWithFontSize(33)
 
-            let frame = CGRect(x: 0, y: 0, width: 500, height: 10)
-            let label = UILabel(frame: frame)
-            label.numberOfLines = 0
-            label.attributedText = quoteText
-            label.sizeToFit()
 
-            print("height is \(label.frame.height)")
-            let yPoint = CGFloat((280 - label.frame.height)/2)
+            let rect = quoteText.boundingRectWithSize(CGSizeMake(400, 10000), options: .UsesLineFragmentOrigin, context: nil)
 
-            quoteText.drawWithRect(CGRect(x: 60, y: yPoint, width: 350, height: 180), options: .UsesLineFragmentOrigin, context: nil)
+            let yPoint = CGFloat((280 - rect.height)/2)
 
-            let wizard = UIImage(named: "wizardTransparentSmall")
+            CGContextSetFillColorWithColor(context, UIColor.redColor().CGColor)
+
+            quoteText.drawWithRect(CGRect(x: 60, y: yPoint, width: 400, height: 180), options: .UsesLineFragmentOrigin, context: nil)
+
+
+            let wizard = UIImage(named: "WizardCornerIcon")
             print(wizard?.size)
+            
 
             wizard?.drawAtPoint(CGPoint(x: 430, y: 210))
-            
+
             let img = UIGraphicsGetImageFromCurrentImageContext()
             
             UIGraphicsEndImageContext()
@@ -508,13 +589,25 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         print(self.enteredText)
 
         let sentinelBook = UIFont(name: "Sentinel-Book", size: fontsize)
-        let sentinelDict = NSDictionary(object: sentinelBook!, forKey: NSFontAttributeName)
-        let aAttrString = NSMutableAttributedString(string: self.currentQuote!, attributes: sentinelDict as? [String : AnyObject])
+        let textColor = UIColor.whiteColor()
+
+        let attributes: NSDictionary = [
+            NSForegroundColorAttributeName: textColor,
+            NSFontAttributeName: sentinelBook!
+        ]
+
+        let aAttrString = NSMutableAttributedString(string: self.currentQuote!, attributes: attributes as? [String : AnyObject])
 
         let sentinelSemiBold = UIFont(name: "Sentinel-SemiBold", size: fontsize)
-        let sentinelDict2 = NSDictionary(object: sentinelSemiBold!, forKey: NSFontAttributeName)
+
+        let attributes2: NSDictionary = [
+            NSForegroundColorAttributeName: textColor,
+            NSFontAttributeName: sentinelSemiBold!
+        ]
+
+
         let bAttrString = NSMutableAttributedString(string: self.enteredText!
-            , attributes: sentinelDict2 as? [String : AnyObject])
+            , attributes: attributes2 as? [String : AnyObject])
 
         aAttrString.appendAttributedString(bAttrString)
 
@@ -527,9 +620,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     }
 
     func finishedAnimation() {
-        let frame = self.view.frame
-        let sparkleView = AnimationImageView(frame: frame)
-        self.view.addSubview(sparkleView)
         animationImageView.animateSparkles("Sparkles", frames: 22)
         shareButton.alpha = 0
         finishedQuoteView.hidden = false
@@ -577,16 +667,35 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
             self.textView.attributedText = attrText
 
-            UIView.animateWithDuration(1.0, animations: {
-                self.textView.alpha = 1
-            })
-
 
             UIView.animateWithDuration(1, delay: 0.7, options: .CurveEaseInOut, animations: {
                 self.finishedButton.alpha = 1
             }, completion: nil)
-            
+
+            let rangeOfText = (textView.text as NSString).rangeOfString(finishItSuffix, options: .CaseInsensitiveSearch)
+            let stringForPlayer = textView.attributedText.mutableCopy() as! NSMutableAttributedString
+
+            UIView.transitionWithView(textView, duration: 0.75, options: [.Repeat, .AllowUserInteraction], animations: { () -> Void in
+                stringForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.3),
+                    range: rangeOfText)
+                self.textView.attributedText = stringForPlayer
+                }, completion: { (finished) -> Void in
+                    UIView.transitionWithView(self.textView, duration: 1.25, options: [UIViewAnimationOptions.Autoreverse, .CurveEaseInOut, .TransitionCrossDissolve, .Repeat, .AllowUserInteraction], animations: { () -> Void in
+                        stringForPlayer.addAttribute(
+                            NSForegroundColorAttributeName,
+                            value: UIColor.whiteColor(),
+                            range: rangeOfText)
+                        self.textView.attributedText = stringForPlayer
+                        }, completion: nil)
+            })
+
         }
+
+        UIView.animateWithDuration(1.0, animations: {
+            self.textView.alpha = 1
+        })
 
     }
 
@@ -606,29 +715,88 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .Present
-        if buttonOne?.selected == true {
-            transition.startingPoint = buttonOne!.center
-        } else {
-            transition.startingPoint = buttonTwo!.center
-        }
+//        if buttonOne?.selected == true {
+//            transition.startingPoint = buttonOne!.center
+//        } else {
+//            transition.startingPoint = buttonTwo!.center
+//        }
+        transition.startingPoint = eyeButton.center
+
 
         transition.duration = 0.4
-//        transition.bubbleColor = UIColor.clearColor()
+        transition.bubbleColor = UIColor(red: 75/255, green: 91/255, blue: 175/255, alpha: 1)
         return transition
     }
 
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .Dismiss
         transition.startingPoint = eyeButton.center
-        UIView.animateWithDuration(0.3) {
-            dismissed.view.alpha = 0
-        }
-//        transition.bubbleColor = UIColor.clearColor()
+//        UIView.animateWithDuration(0.3) {
+//            dismissed.view.alpha = 0
+//        }
+        transition.bubbleColor = UIColor(red: 75/255, green: 91/255, blue: 175/255, alpha: 1)
         return transition
     }
 
+    func createBodyEditor()
+    {
+        // Register observers for keyboard show/hide states and update height property
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let mainQueue = NSOperationQueue.mainQueue()
+
+        notificationCenter.addObserverForName(UIKeyboardWillShowNotification, object: nil, queue: mainQueue) { notification in
+            if let rectValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue
+            {
+                self.keyboardHeight = rectValue.CGRectValue().size.height
+            }
+        }
+
+        notificationCenter.addObserverForName(UIKeyboardWillHideNotification, object: nil, queue: mainQueue) { notification in
+            self.keyboardHeight = 0
+        }
+
+        // Create a button bar for the number pad
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRectMake(0, 0, 320, 50))
+        //doneToolbar.barTintColor = UIColor(red: 52/255, green: 62/255, blue: 139/255, alpha: 1)
+        //doneToolbar.barTintColor = UIColor.darkGrayColor()
+        doneToolbar.barStyle = .Black
+
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(HomeViewController.hideKeyboard))
+        if let font = UIFont(name: "Sentinel-SemiBold", size: 18) {
+            done.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
+        done.tintColor = UIColor.whiteColor()
 
 
+        doneToolbar.items = [flexSpace, done, flexSpace]
+        doneToolbar.sizeToFit()
+
+        self.textView.inputAccessoryView = doneToolbar
+    }
+
+    func hideKeyboard()
+    {
+        view.endEditing(true)
+    }
+
+
+    func animateEyeball() {
+
+        if areButtonsFanned == false {
+
+        let duration = CFTimeInterval.init(48)
+        let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "contents")
+        animation.calculationMode = kCAAnimationDiscrete;
+        animation.duration = duration / 24 // 24 frames per second
+        animation.values = imagesArray.map {$0.CGImage as! AnyObject}
+        animation.repeatCount = 1
+        animation.delegate = self
+
+        eyeButton.imageView!.layer.addAnimation(animation, forKey: "animation")
+
+        }
+    }
 
 
 

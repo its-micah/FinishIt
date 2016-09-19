@@ -12,6 +12,11 @@ protocol getQuoteProtocol {
     func selectedQuoteOfDay()
 }
 
+private extension Selector {
+    static let QODTapped =
+        #selector(ListViewController.handleTap)
+}
+
 class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var bar: UINavigationBar!
@@ -24,13 +29,24 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let nib = UINib(nibName: "ListHeaderView", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "ListHeaderView")
         tableView.delegate = self
-        self.tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
 
         
         self.quotes = DataService.dataService.getQuoteList()
         quoteOfDay = DataService.dataService.getQuote()
+        self.tableView.rowHeight = 54.0
+
         self.tableView.reloadData()
 
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.hidesBarsOnTap = true
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -39,7 +55,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.textLabel?.text = quote.quoteText + "..."
         cell.textLabel?.numberOfLines = 1
         cell.textLabel?.textColor = UIColor.whiteColor()
-        cell.textLabel?.font = UIFont(name: "Sentinel", size: 18)
+        cell.textLabel?.font = UIFont(name: "Sentinel", size: 20)
         return cell
     }
 
@@ -51,8 +67,8 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         let cell = self.tableView.dequeueReusableHeaderFooterViewWithIdentifier("ListHeaderView")
         let header = cell as! ListHeaderView
-        header.quoteLabel.text = quoteOfDay
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ListViewController.handleTap))
+        header.quoteLabel.text = quoteOfDay! + "..."
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: .QODTapped)
         cell?.addGestureRecognizer(tapRecognizer)
         tableView.tableHeaderView = header
         return cell?.contentView
@@ -68,8 +84,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func handleTap() {
-        self.delegate?.selectedQuoteOfDay()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.performSegueWithIdentifier("loadQOD", sender: self)
+
+//        self.delegate?.selectedQuoteOfDay()
+
     }
     
     @IBAction func onCloseButtonTapped(sender: AnyObject) {
@@ -81,10 +99,17 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue.identifier == "loadQOD" {
+            print("unwinding")
+        } else {
+
         let selectedPath = tableView.indexPathForCell(sender as! UITableViewCell)
         let selectedQuote = quotes[selectedPath!.row] as Quote
         let vc = segue.destinationViewController as! HomeViewController
         vc.currentQuote = selectedQuote.quoteText
+
+        }
     }
 
 }

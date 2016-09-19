@@ -29,6 +29,7 @@ class FinishedQuoteView: UIView {
     */
     
     func configure(quote: NSMutableAttributedString) {
+        quoteLabel.textColor = UIColor.blackColor()
         self.quoteLabel.attributedText = quote
     }
     
