@@ -17,12 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="splashscreen1" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-Rj-C9b">
-                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashScreen2" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-Rj-C9b">
+                                <rect key="frame" x="112.5" y="-33.5" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qGO-Rj-C9b" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="E1h-z9-loC"/>
+                            <constraint firstItem="qGO-Rj-C9b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="S3j-mK-ByA"/>
                             <constraint firstAttribute="trailing" secondItem="qGO-Rj-C9b" secondAttribute="trailing" id="ZXG-n9-wZ5"/>
                             <constraint firstItem="qGO-Rj-C9b" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="fPg-WZ-VwS"/>
                             <constraint firstItem="qGO-Rj-C9b" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="q4m-q7-LDy"/>
@@ -52,6 +54,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splashscreen1" width="375" height="667"/>
+        <image name="splashScreen2" width="375" height="667"/>
     </resources>
 </document>

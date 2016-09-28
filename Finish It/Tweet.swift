@@ -24,7 +24,9 @@ struct Tweet {
             return nil
         }
 
-        guard let username = user["name"]?.string, let screenName = user["screen_name"]?.string, let userImage = user["profile_image_url_https"]?.string else {
+        guard let username = user["name"]?.string,
+            let screenName = user["screen_name"]?.string,
+            let userImageURL = user["profile_image_url_https"]?.string else {
             return nil
         }
 
@@ -42,6 +44,17 @@ struct Tweet {
         let date = dateFormatter.dateFromString(creationTime)
         let elapsedTime = date?.getElapsedInterval()
 
+        let userImage = userImageURL.stringByReplacingOccurrencesOfString("_normal", withString: "", options: .CaseInsensitiveSearch, range: nil)
+
+        let isRetweeted = status["retweeted_status"].object
+
+        if isRetweeted?.count <= 0 || isRetweeted == nil {
+            print("This hasn't been retweeted")
+        } else {
+            print("this is a retweet")
+        }
+
+        print(isRetweeted)
 
         self.imageURL = url
         self.screenName = "@\(screenName)"

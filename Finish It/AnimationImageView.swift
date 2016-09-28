@@ -9,34 +9,91 @@
 import UIKit
 import AVFoundation
 
+protocol Animatable {
+    func finishedAnimation()
+}
+
 class AnimationImageView: UIImageView {
 
-    func animate() {
+    var delegate : Animatable?
+
+    func animateWithNameAndFrames(name: String, frames: Int) {
         print("animating view now")
         self.hidden = false
 
-        if let soundURL = NSBundle.mainBundle().URLForResource("thunder", withExtension: "mp3") {
-            var mySound: SystemSoundID = 0
-            AudioServicesCreateSystemSoundID(soundURL, &mySound)
-            // Play
-            AudioServicesPlaySystemSound(mySound);
+        if name == "savedLibAnimation" {
+            if let soundURL = NSBundle.mainBundle().URLForResource("IIF-4", withExtension: "wav") {
+                var mySound: SystemSoundID = 0
+                AudioServicesCreateSystemSoundID(soundURL, &mySound)
+                // Play
+                AudioServicesPlaySystemSound(mySound);
+            }
         }
 
 
         self.alpha = 1
         var imagesArray = [UIImage]()
-        for name in ["savedLibAnimation_0.png", "savedLibAnimation_1.png", "savedLibAnimation_2.png", "savedLibAnimation_3.png", "savedLibAnimation_4.png", "savedLibAnimation_5.png", "savedLibAnimation_6.png", "savedLibAnimation_7.png", "savedLibAnimation_8.png", "csavedLibAnimation_9.png","savedLibAnimation_10.png", "savedLibAnimation_11.png", "savedLibAnimation_12.png", "savedLibAnimation_13.png", "savedLibAnimation_14.png", "savedLibAnimation_15.png", "savedLibAnimation_16.png", "savedLibAnimation_17.png", "savedLibAnimation_18.png", "savedLibAnimation_19.png", "csavedLibAnimation_20.png", "savedLibAnimation_21.png", "savedLibAnimation_22.png", "savedLibAnimation_23.png", "savedLibAnimation_24.png", "savedLibAnimation_25.png", "savedLibAnimation_26.png", "savedLibAnimation_27.png", "savedLibAnimation_28.png", "savedLibAnimation_29.png"] {
-            if let image = UIImage(named: name) {
+
+//        for var i = 0; i <= frames; i += 1 {
+//            let imageName = "\(name)_\(i).png"
+//            if let image = UIImage(named: imageName) {
+//                imagesArray.append(image)
+//            }
+//        }
+
+        for i in 0...frames {
+            let imageName = "\(name)_\(i).png"
+            if let image = UIImage(named: imageName) {
                 imagesArray.append(image)
             }
         }
 
-        self.animationImages = imagesArray
-        self.animationDuration = 0.8
-        self.animationRepeatCount = 1
-        self.startAnimating()
-        
+        let duration = CFTimeInterval.init(frames)
 
+        let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "contents")
+        animation.calculationMode = kCAAnimationDiscrete;
+        animation.duration = duration / 24 // 24 frames per second
+        animation.values = imagesArray.map {$0.CGImage as! AnyObject}
+        animation.repeatCount = 1
+        animation.delegate = self
+        self.layer.addAnimation(animation, forKey: "animation")
+
+
+    }
+
+    func animateSparkles(name: String, frames: Int) {
+        var imagesArray = [UIImage]()
+
+//        for var i = 0; i <= frames; i += 1 {
+//            let imageName = "\(name)_\(i).png"
+//            if let image = UIImage(named: imageName) {
+//                imagesArray.append(image)
+//            }
+//        }
+
+        for i in 0...frames {
+            let imageName = "\(name)_\(i).png"
+            if let image = UIImage(named: imageName) {
+                imagesArray.append(image)
+            }
+        }
+
+        let duration = CFTimeInterval.init(frames)
+
+        let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "contents")
+        animation.calculationMode = kCAAnimationDiscrete;
+        animation.duration = duration / 24 // 24 frames per second
+        animation.values = imagesArray.map {$0.CGImage as! AnyObject}
+        animation.repeatCount = 1
+        self.layer.addAnimation(animation, forKey: "animation")
+
+    }
+
+
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        if flag {
+            self.delegate!.finishedAnimation()
+        }
     }
 
 }

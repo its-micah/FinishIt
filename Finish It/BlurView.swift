@@ -36,12 +36,13 @@ class BlurView: UIView, UIGestureRecognizerDelegate {
     
     func commonInit() {
         self.alpha = 0
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //always fill the view
-        blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        self.addSubview(blurEffectView)
+//        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        //always fill the view
+//        blurEffectView.frame = self.bounds
+//        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+//        self.addSubview(blurEffectView)
+        self.backgroundColor = UIColor(red: 84/255, green: 100/255, blue: 192/255, alpha: 1)
         
 
     }
