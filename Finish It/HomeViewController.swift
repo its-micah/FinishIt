@@ -67,7 +67,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
         // Do any additional setup after loading the view, typically from a nib.
         self.hideKeyboardWhenTappedAround()
-        buttonOne = createButtonWithName("Quotes")
+        buttonOne = createButtonWithName("List")
         buttonTwo = createButtonWithName("Tweets")
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "EskapadeFraktur", size: 20.0)!,
                                                                          NSForegroundColorAttributeName: UIColor.whiteColor()]
@@ -113,7 +113,14 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         self.view.addSubview(sparkleView)
 
 
-        for var i = 0; i <= 48; i += 1 {
+//        for var i = 0; i <= 48; i += 1 {
+//            let imageName = "eyeball_\(i).png"
+//            if let image = UIImage(named: imageName) {
+//                imagesArray.append(image)
+//            }
+//        }
+
+        for i in 0...48 {
             let imageName = "eyeball_\(i).png"
             if let image = UIImage(named: imageName) {
                 imagesArray.append(image)
@@ -124,7 +131,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
         eyeButton.imageView?.animationImages = imagesArray
         eyeButton.setImage(imagesArray[0], forState: .Normal)
 
-        var eyeballAnimateTimer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: #selector(HomeViewController.animateEyeball), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: #selector(HomeViewController.animateEyeball), userInfo: nil, repeats: true)
 
 
     }
@@ -517,7 +524,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             if textView.text.containsString(finishItSuffix) {
                 textView.text.removeRange(stringRange!)
             }
-            if let newPosition = textView.positionFromPosition(textView.beginningOfDocument, inDirection: UITextLayoutDirection.Right, offset: (currentQuote?.characters.count)!) {
+            if textView.positionFromPosition(textView.beginningOfDocument, inDirection: UITextLayoutDirection.Right, offset: (currentQuote?.characters.count)!) != nil {
 
                 textView.text = currentQuote! + " "
             }
@@ -584,7 +591,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     func buildQuoteWithFontSize(fontsize: CGFloat) -> NSMutableAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         let startIndex = self.textView.text.startIndex.advancedBy((self.currentQuote?.characters.count)!)
-        let rangeOfQuote = Range(start: startIndex, end: self.textView.text.characters.endIndex)
+        let rangeOfQuote = startIndex..<self.textView.text.characters.endIndex
         self.enteredText = self.textView.text.substringWithRange(rangeOfQuote)
         print(self.enteredText)
 

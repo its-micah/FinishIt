@@ -32,7 +32,7 @@ class DataService {
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
         formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("07/06/16")
+        let startDate = formatter.dateFromString("06/25/16")
         let cal = NSCalendar.currentCalendar()
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
@@ -56,24 +56,26 @@ class DataService {
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
         formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("05/12/16")
+        let startDate = formatter.dateFromString("06/25/16")
         let cal = NSCalendar.currentCalendar()
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
-        var index = components.day
-        var counter:Int = 0
+//        var index = components.day
+//        var counter:Int = 0
 
-        if index > quotes.count {
-            index = 40
-        }
 
-        for q in quotes {
-            if counter > index - 40 && counter < index {
-                let quote = Quote(quoteText: q as! String)
-                quoteArray.append(quote)
+        var index = components.day % quotes.count
+        index -= 1
+
+        for i in 0...25 {
+            if index == -1 {
+                index = quotes.count - 1
             }
-            counter += 1
+
+            let quote = Quote(quoteText: quotes[index] as! String)
+            quoteArray.append(quote)
+            index -= 1
         }
 
 
@@ -102,56 +104,5 @@ class DataService {
         })
 
     }
-
-//    func getTweetsFromHashtag(hashtag: String) {
-//        swifter?.getSearchTweetsWithQuery(hashtag, geocode: nil, lang: "und", locale: nil, resultType: nil, count: 10, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
-//
-//            print(statuses?.count)
-//            var array = [Tweet]()
-//
-//            for status in statuses! {
-//                let user = status["user"]
-//                let username = user["name"].string
-//                let screenName = user["screen_name"].string
-//                let userImage = user["profile_image_url"].string
-//                let creationTime = status["created_at"].string
-//                let dateFormatter = NSDateFormatter()
-//                dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-//                dateFormatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
-//                let date = dateFormatter.dateFromString(creationTime!)
-//                let testDate = date?.getElapsedInterval()
-//                print(testDate)
-//
-//                let entities = status["entities"]
-//                let media = entities["media"]
-//                let mediaArray = media[0]
-//                var url = mediaArray["media_url"].string
-//                if url == nil {
-//                    url = ""
-//                }
-//                print(url)
-//                let tweet = Tweet(twitterUsername: username!, imageURL: url!, twitterUserImageURL: userImage!, screenName: screenName!, time: testDate!)
-//                array.append(tweet)
-//            }
-//            self.tweets = array
-//
-//            }, failure: { (error) in
-//                print(error)
-//        })
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
