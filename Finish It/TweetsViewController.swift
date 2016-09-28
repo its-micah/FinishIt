@@ -78,16 +78,20 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
             var array: Array<Tweet> = []
 
             for status in statuses! {
-                let tweet = Tweet.init(status: status)
 
-                if let completeTweet = tweet {
-                    array.append(completeTweet)
+                if status["retweeted_status"].object?.count == nil {
+
+                    let tweet = Tweet.init(status: status)
+
+                    if let completeTweet = tweet {
+                        array.append(completeTweet)
+                    }
                 }
+
             }
             self.tweets = array
             self.tweetsCollectionView.reloadData()
             self.activityIndicator.stopAnimating()
-            //self.spinner?.removeFromSuperview()
             self.refreshControl?.endRefreshing()
 
             }, failure: { (error) in
