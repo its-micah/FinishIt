@@ -46,6 +46,15 @@ struct Tweet {
 
         let userImage = userImageURL.stringByReplacingOccurrencesOfString("_normal", withString: "", options: .CaseInsensitiveSearch, range: nil)
 
+        let isRetweeted = status["retweeted_status"].object
+
+        if isRetweeted?.count <= 0 || isRetweeted == nil {
+            print("This hasn't been retweeted")
+        } else {
+            print("this is a retweet")
+        }
+
+        print(isRetweeted)
 
         self.imageURL = url
         self.screenName = "@\(screenName)"
