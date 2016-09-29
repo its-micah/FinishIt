@@ -1,16 +1,16 @@
 PODS:
   - BubbleTransition (1.0.3)
-  - Kingfisher (2.4.1)
+  - Kingfisher (2.6.0)
   - pop (1.0.9)
 
 DEPENDENCIES:
   - BubbleTransition (~> 1.0.0)
-  - Kingfisher (~> 2.4)
+  - Kingfisher (~> 2.6)
   - pop (~> 1.0)
 
 SPEC CHECKSUMS:
   BubbleTransition: a7ae6678721406d60f604cbbea1ace505563119d
-  Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
+  Kingfisher: d84c5fd176ea86cc7b8aac65fd55feda6f70f130
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
 
 COCOAPODS: 0.39.0

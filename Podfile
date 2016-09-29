@@ -4,9 +4,9 @@
 use_frameworks!
 
 target 'Finish It' do
-pod 'Kingfisher', '~> 2.4'
+pod 'Kingfisher', '~> 2.6’
 pod 'pop', '~> 1.0'
-pod 'BubbleTransition', '~> 1.0.0'
+pod 'BubbleTransition', '~> 1.0.0’
 
 end
 

@@ -20,7 +20,7 @@ private extension Selector {
 }
 
 
-class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable, UIViewControllerTransitioningDelegate {
+class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissProtocol, UITextViewDelegate, getQuoteProtocol, Animatable, UIViewControllerTransitioningDelegate, CAAnimationDelegate {
 
     @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
@@ -582,7 +582,7 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
             UIGraphicsEndImageContext()
             
             let TwitterText = "#ItIsFinishedApp"
-            self.showSharingWithImageAndText(img, text: TwitterText)
+            self.showSharingWithImageAndText(img!, text: TwitterText)
         }
 
         

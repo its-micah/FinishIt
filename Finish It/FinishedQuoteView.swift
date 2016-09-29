@@ -78,7 +78,7 @@ class FinishedQuoteView: UIView {
         UIGraphicsEndImageContext()
 
         let TwitterText = "#ItIsFinishedApp"
-        delegate?.showSharingWithImageAndText(img, text: TwitterText)
+        delegate?.showSharingWithImageAndText(img!, text: TwitterText)
 
 
 

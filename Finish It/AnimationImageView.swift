@@ -13,7 +13,7 @@ protocol Animatable {
     func finishedAnimation()
 }
 
-class AnimationImageView: UIImageView {
+class AnimationImageView: UIImageView, CAAnimationDelegate {
 
     var delegate : Animatable?
 
@@ -90,7 +90,7 @@ class AnimationImageView: UIImageView {
     }
 
 
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+    func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if flag {
             self.delegate!.finishedAnimation()
         }

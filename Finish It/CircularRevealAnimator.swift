@@ -4,18 +4,20 @@
 //
 
 import QuartzCore
+import UIKit
 
 private func SquareAroundCircle(center: CGPoint, radius: CGFloat) -> CGRect {
     assert(0 <= radius, "radius must be a positive value")
-    return CGRectInset(CGRect(origin: center, size: CGSizeZero), -radius, -radius)
+    return CGRect(origin: center, size: CGSize.zero).insetBy(dx: -radius, dy: -radius)
 }
 
 class CircularRevealAnimator {
-    var completion: () -> Void = {}
 
-    private let layer: CALayer
-    private let mask: CAShapeLayer
-    private let animation: CABasicAnimation
+    var completion: (() -> Void)?
+
+    let layer: CALayer
+    let mask: CAShapeLayer
+    let animation: CABasicAnimation
 
     var duration: CFTimeInterval {
         get { return animation.duration }
@@ -28,21 +30,23 @@ class CircularRevealAnimator {
     }
 
     init(layer: CALayer, center: CGPoint, startRadius: CGFloat, endRadius: CGFloat, invert: Bool = false) {
-        let startCirclePath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: startRadius), nil)
-        let endCirclePath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: endRadius), nil)
-        
+
+
+        let startCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: startRadius), transform: nil)
+        let endCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: endRadius), transform: nil)
+
         var startPath = startCirclePath, endPath = endCirclePath
         if invert {
-            var path = CGPathCreateMutable()
-            CGPathAddRect(path, nil, layer.bounds)
-            CGPathAddPath(path, nil, startCirclePath)
+            var path = CGMutablePath(CGPathCreateMutable())
+            path.addRect(layer.bounds)
+            path.addPath(startCirclePath)
             startPath = path
-            path = CGPathCreateMutable()
-            CGPathAddRect(path, nil, layer.bounds)
-            CGPathAddPath(path, nil, endCirclePath)
+            path = CGMutablePath()
+            path.addRect(layer.bounds)
+            path.addPath(endCirclePath)
             endPath = path
         }
-        
+
         self.layer = layer
 
         mask = CAShapeLayer()
@@ -54,7 +58,7 @@ class CircularRevealAnimator {
         animation.toValue = endPath
         animation.delegate = AnimationDelegate {
             layer.mask = nil
-            self.completion()
+            self.completion?()
             self.animation.delegate = nil
         }
     }
