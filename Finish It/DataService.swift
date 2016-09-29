@@ -68,7 +68,7 @@ class DataService {
         var index = components.day % quotes.count
         index -= 1
 
-        for i in 0...25 {
+        for _ in 0...25 {
             if index == -1 {
                 index = quotes.count - 1
             }

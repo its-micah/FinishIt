@@ -3,8 +3,8 @@
 //  Licensed under the MIT license: http://opensource.org/licenses/MIT
 //
 
+
 import QuartzCore
-import UIKit
 
 private func SquareAroundCircle(center: CGPoint, radius: CGFloat) -> CGRect {
     assert(0 <= radius, "radius must be a positive value")
@@ -30,22 +30,25 @@ class CircularRevealAnimator {
     }
 
     init(layer: CALayer, center: CGPoint, startRadius: CGFloat, endRadius: CGFloat, invert: Bool = false) {
+//        let startCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: startRadius), transform: nil)
+//        let endCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: endRadius), transform: nil)
+
+        let startCirclePath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: startRadius), nil)
+        let endCirclePath = CGPathCreateWithEllipseInRect(SquareAroundCircle(center, radius: endRadius), nil)
 
 
-        let startCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: startRadius), transform: nil)
-        let endCirclePath = CGPath(ellipseIn: SquareAroundCircle(center, radius: endRadius), transform: nil)
 
-        var startPath = startCirclePath, endPath = endCirclePath
-        if invert {
-            var path = CGMutablePath(CGPathCreateMutable())
-            path.addRect(layer.bounds)
-            path.addPath(startCirclePath)
-            startPath = path
-            path = CGMutablePath()
-            path.addRect(layer.bounds)
-            path.addPath(endCirclePath)
-            endPath = path
-        }
+        let startPath = startCirclePath, endPath = endCirclePath
+//        if invert {
+//            var path = CGMutablePath()
+//            path.addRect(layer.bounds)
+//            path.addPath(startCirclePath)
+//            startPath = path
+//            path = CGMutablePath()
+//            path.addRect(layer.bounds)
+//            path.addPath(endCirclePath)
+//            endPath = path
+//        }
 
         self.layer = layer
 

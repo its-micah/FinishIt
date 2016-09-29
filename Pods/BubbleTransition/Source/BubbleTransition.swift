@@ -94,7 +94,8 @@ extension BubbleTransition: UIViewControllerAnimatedTransitioning {
      Required by UIViewControllerAnimatedTransitioning
      */
     public func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-         let containerView = transitionContext.containerView()
+        let containerView = transitionContext.containerView()
+
 
 
         if transitionMode == .Present {
