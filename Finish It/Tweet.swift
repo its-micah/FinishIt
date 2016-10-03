@@ -16,6 +16,7 @@ struct Tweet {
     let twitterUserImageURL: String
     let screenName: String
     let time: String
+    let isARetweet: Bool
 
 
     init?(status: JSONValue) {
@@ -50,8 +51,10 @@ struct Tweet {
 
         if isRetweeted?.count <= 0 || isRetweeted == nil {
             print("This hasn't been retweeted")
+            self.isARetweet = false
         } else {
             print("this is a retweet")
+            self.isARetweet = true
         }
 
         print(isRetweeted)
