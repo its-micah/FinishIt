@@ -62,7 +62,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
         NSNotificationCenter.defaultCenter().addObserver(self, selector: .keyboardWillShow, name: UIKeyboardWillShowNotification, object: nil)
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -108,17 +107,13 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
         loadTextView()
         createBodyEditor()
-        let frame = self.view.frame
-        let sparkleView = AnimationImageView(frame: frame)
+        print(self.view.frame.minX)
+        print(self.view.frame.minY)
+
+        let rectangle = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
+        let sparkleView = AnimationImageView(frame: rectangle)
         self.view.addSubview(sparkleView)
 
-
-//        for var i = 0; i <= 48; i += 1 {
-//            let imageName = "eyeball_\(i).png"
-//            if let image = UIImage(named: imageName) {
-//                imagesArray.append(image)
-//            }
-//        }
 
         for i in 0...48 {
             let imageName = "eyeball_\(i).png"
@@ -126,7 +121,6 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
                 imagesArray.append(image)
             }
         }
-
 
         eyeButton.imageView?.animationImages = imagesArray
         eyeButton.setImage(imagesArray[0], forState: .Normal)
@@ -142,18 +136,14 @@ class HomeViewController: UIViewController, FinishedQuoteViewProtocol, DismissPr
 
     func createButtonWithName(name: String) -> UIButton {
         let center = eyeButton.center
-        //let rect = CGRectMake(eyeButton.frame.origin.x, eyeButton.frame.origin.y, 50, 50)
         let button = UIButton(frame: eyeButton.frame)
         button.center = center
         button.layer.borderWidth = 0.0
         button.setTitle(name, forState: .Normal)
         button.titleLabel!.font = UIFont(name: "EskapadeFraktur", size: 23)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        //button.setTitleColor(UIColor(red: 150/255, green: 150/255, blue: 142/255, alpha: 1)
-//, forState: .Normal)
         button.sizeToFit()
 
-        //button.setImage(UIImage(named: name), forState: .Normal)
         self.view.addSubview(button)
         return button
     }
