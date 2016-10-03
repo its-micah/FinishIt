@@ -9,6 +9,30 @@
 import Foundation
 import SwifteriOS
 
+
+public extension NSBundle {
+
+    /**
+     Gets the contents of the specified plist file.
+
+     - parameter plistName: property list where defaults are declared
+     - parameter bundle: bundle where defaults reside
+
+     - returns: dictionary of values
+     */
+    public static func contentsOfFile(plistName: String, bundle: NSBundle? = nil) -> [String : AnyObject] {
+        let fileParts = plistName.componentsSeparatedByString(".")
+
+        guard fileParts.count == 2,
+            let resourcePath = (bundle ?? NSBundle.mainBundle()).pathForResource(fileParts[0], ofType: fileParts[1]),
+            let contents = NSDictionary(contentsOfFile: resourcePath) as? [String : AnyObject]
+            else { return [:] }
+
+        return contents
+    }
+
+}
+
 class DataService {
     static let dataService = DataService()
     var swifter: Swifter?
@@ -21,13 +45,14 @@ class DataService {
 
     func getQuote() -> String {
 
-        var myDict: NSDictionary?
-        var quote: String?
-        if let path = NSBundle.mainBundle().pathForResource("QuoteOfDay", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path)
-        }
+        let values = NSBundle.contentsOfFile("QuoteOfDay.plist")
+        print(values["Quotes"]) //
 
-        let quotes = myDict?.objectForKey("Quotes") as! NSArray
+
+        guard let quotes = values["Quotes"] as? Array<String> else {
+
+            return "My favorite time of year is"
+        }
 
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
@@ -37,21 +62,29 @@ class DataService {
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
-        quote = quotes[components.day % quotes.count] as? String
-        return quote!
+        let quoteCount = quotes.count
+
+        let quote = quotes[components.day % quoteCount]
+
+
+
+        return quote
     }
 
 
     func getQuoteList() -> Array<Quote> {
 
-        var myDict: NSDictionary?
-        if let path = NSBundle.mainBundle().pathForResource("QuoteOfDay", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path)
+        let values = NSBundle.contentsOfFile("QuoteOfDay.plist")
+        print(values["Quotes"]) //
+
+
+        guard let quotes = values["Quotes"] as? Array<String> else {
+            return []
         }
+
 
         var quoteArray: Array<Quote> = []
 
-        let quotes = myDict?.objectForKey("Quotes") as! NSArray
 
         let today =  NSDate()
         let formatter = NSDateFormatter.init()
@@ -61,11 +94,9 @@ class DataService {
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
-//        var index = components.day
-//        var counter:Int = 0
+        let quoteCount = quotes.count
 
-
-        var index = components.day % quotes.count
+        var index = components.day % quoteCount
         index -= 1
 
         for _ in 0...25 {
@@ -73,13 +104,11 @@ class DataService {
                 index = quotes.count - 1
             }
 
-            let quote = Quote(quoteText: quotes[index] as! String)
+            let quote = Quote(quoteText: quotes[index])
             quoteArray.append(quote)
             index -= 1
         }
 
-
-        
         return quoteArray
 
     }
