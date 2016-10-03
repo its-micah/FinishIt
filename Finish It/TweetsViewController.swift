@@ -72,19 +72,23 @@ class TweetsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
 
     func getTweetsFromHashtag() {
-        swifter?.getSearchTweetsWithQuery("ItIsFinishedApp", geocode: nil, lang: nil, locale: nil, resultType: nil, count: 20, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
+        swifter?.getSearchTweetsWithQuery("ItIsFinishedApp", geocode: nil, lang: nil, locale: nil, resultType: nil, count: 40, until: nil, sinceID: nil, maxID: nil, includeEntities: true, callback: nil, success: { (statuses, searchMetadata) in
 
             print(statuses?.count)
             var array: Array<Tweet> = []
 
             for status in statuses! {
 
-                if status["retweeted_status"].object?.count == nil {
+                print("this is the retweet status object count \(status["retweeted_status"].object?.count)")
+
+               if status["retweeted_status"].object?.count == nil {
 
                     let tweet = Tweet.init(status: status)
 
                     if let completeTweet = tweet {
+
                         array.append(completeTweet)
+
                     }
                 }
 
