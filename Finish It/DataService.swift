@@ -35,7 +35,6 @@ public extension NSBundle {
 
 class DataService {
     static let dataService = DataService()
-    var swifter: Swifter?
 
     var tweets:[Tweet] = [] {
         didSet {
@@ -110,27 +109,6 @@ class DataService {
         }
 
         return quoteArray
-
-    }
-
-    func getTweetsWithHashtag(hashtag: String) {
-        swifter = Swifter(consumerKey: "dIS3vBfYpu5a87L6zSLV0ab3f", consumerSecret: "joYbUyXHwdQOtBpc6ULOSfGMrCok6ytqpcraR3mGzHcXpuR939", appOnly: true)
-        swifter!.authorizeAppOnlyWithSuccess({ (accessToken, response) -> Void in
-            print("success - access token is \(accessToken)")
-            //self.getTweetsFromHashtag(hashtag)
-//            self.swifter!.getUsersShowWithScreenName("ItIsFinishedApp", includeEntities: true, success: { (user) in
-//                if let userDict = user {
-//                    if let userId = userDict["id_str"] {
-//                        //self.getTwitterStatusWithUserId(userId.string!)
-//                        self.getTweetsFromHashtag()
-//                    }
-//                }
-//                }, failure: { (error) in
-//                    print(error)
-//            })
-            }, failure: { (error) -> Void in
-                print("Error Authenticating: \(error.localizedDescription)")
-        })
 
     }
 
