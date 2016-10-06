@@ -19,7 +19,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FK-Rl-2sV">
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jld-dl-3UX"/>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote of Day" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7P-lC-Hi8">
                             <fontDescription key="fontDescription" name="Sentinel-Medium" family="Sentinel" pointSize="27"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -28,14 +27,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.29417494090000001" green="0.35573834599999998" blue="0.68597402910000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="jld-dl-3UX" secondAttribute="trailing" id="Bbp-zX-LM5"/>
                         <constraint firstItem="j7P-lC-Hi8" firstAttribute="leading" secondItem="2FK-Rl-2sV" secondAttribute="leading" constant="8" id="CDy-5n-GF2"/>
                         <constraint firstItem="j7P-lC-Hi8" firstAttribute="centerX" secondItem="2FK-Rl-2sV" secondAttribute="centerX" id="P3q-4R-Tll"/>
-                        <constraint firstItem="jld-dl-3UX" firstAttribute="top" secondItem="2FK-Rl-2sV" secondAttribute="top" id="SoD-Uv-Z7F"/>
-                        <constraint firstAttribute="bottom" secondItem="jld-dl-3UX" secondAttribute="bottom" id="UGb-6s-C8H"/>
                         <constraint firstItem="j7P-lC-Hi8" firstAttribute="centerY" secondItem="2FK-Rl-2sV" secondAttribute="centerY" id="huO-rQ-U1t"/>
                         <constraint firstAttribute="trailing" secondItem="j7P-lC-Hi8" secondAttribute="trailing" constant="8" id="lwh-5u-s03"/>
-                        <constraint firstItem="jld-dl-3UX" firstAttribute="leading" secondItem="2FK-Rl-2sV" secondAttribute="leading" id="m2U-jf-e2c"/>
                     </constraints>
                 </view>
             </subviews>
