@@ -54,11 +54,20 @@ class DataService {
         }
 
         let today =  NSDate()
+
         let formatter = NSDateFormatter.init()
         formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("06/25/16")
+
         let cal = NSCalendar.currentCalendar()
+        let dateComponents = NSDateComponents()
+        dateComponents.month = 6
+        dateComponents.day = 25
+        dateComponents.year = 2016
+
+        let startDate = cal.dateFromComponents(dateComponents)
         let unit = NSCalendarUnit.Day
+
+
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
         let quoteCount = quotes.count
@@ -74,7 +83,7 @@ class DataService {
     func getQuoteList() -> Array<Quote> {
 
         let values = NSBundle.contentsOfFile("QuoteOfDay.plist")
-        print(values["Quotes"]) //
+        print(values["Quotes"]) 
 
 
         guard let quotes = values["Quotes"] as? Array<String> else {
@@ -86,10 +95,13 @@ class DataService {
 
 
         let today =  NSDate()
-        let formatter = NSDateFormatter.init()
-        formatter.dateStyle = .ShortStyle
-        let startDate = formatter.dateFromString("06/25/16")
         let cal = NSCalendar.currentCalendar()
+        let dateComponents = NSDateComponents()
+        dateComponents.month = 6
+        dateComponents.day = 25
+        dateComponents.year = 2016
+
+        let startDate = cal.dateFromComponents(dateComponents)
         let unit = NSCalendarUnit.Day
         let components = cal.components(unit, fromDate: startDate!, toDate: today, options: NSCalendarOptions.MatchFirst)
         print(components.day)
