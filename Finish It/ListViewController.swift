@@ -17,7 +17,7 @@ private extension Selector {
         #selector(ListViewController.handleTap)
 }
 
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var bar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
@@ -29,7 +29,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let nib = UINib(nibName: "ListHeaderView", bundle: nil)
         tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "ListHeaderView")
         tableView.delegate = self
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -46,7 +46,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidAppear(animated: Bool) {
         navigationController?.hidesBarsOnSwipe = true
-        navigationController?.hidesBarsOnTap = true
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -69,7 +68,9 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         let header = cell as! ListHeaderView
         header.quoteLabel.text = quoteOfDay! + "..."
         let tapRecognizer = UITapGestureRecognizer(target: self, action: .QODTapped)
-        cell?.addGestureRecognizer(tapRecognizer)
+        tapRecognizer.delegate = self
+        tapRecognizer.numberOfTapsRequired = 1
+        cell?.contentView.addGestureRecognizer(tapRecognizer)
         tableView.tableHeaderView = header
         return cell?.contentView
     }
