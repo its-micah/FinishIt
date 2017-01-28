@@ -34,13 +34,6 @@ class AnimationImageView: UIImageView, CAAnimationDelegate {
         self.alpha = 1
         var imagesArray = [UIImage]()
 
-//        for var i = 0; i <= frames; i += 1 {
-//            let imageName = "\(name)_\(i).png"
-//            if let image = UIImage(named: imageName) {
-//                imagesArray.append(image)
-//            }
-//        }
-
         for i in 0...frames {
             let imageName = "\(name)_\(i).png"
             if let image = UIImage(named: imageName) {
@@ -63,13 +56,6 @@ class AnimationImageView: UIImageView, CAAnimationDelegate {
 
     func animateSparkles(name: String, frames: Int) {
         var imagesArray = [UIImage]()
-
-//        for var i = 0; i <= frames; i += 1 {
-//            let imageName = "\(name)_\(i).png"
-//            if let image = UIImage(named: imageName) {
-//                imagesArray.append(image)
-//            }
-//        }
 
         for i in 0...frames {
             let imageName = "\(name)_\(i).png"
